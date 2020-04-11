@@ -1,18 +1,27 @@
-# Tutorial 1 - Serializer
+# Serializer
 
 ## Serializer Introduction
 - Python Object --> JSON (Render)
 - JSON --> Python Object (Parser)
 
-### Using "Serializer" serializer (Basic Type)
+## Type of Serializer
+### "Serializer" (Basic Type, Extend BaseSerializer)
 - defines the fields that get serialized/deserialized
 - able to set "VALIDATION" (such as required, max_length, default)
 - field can control the how the browsable API should be displayed 
 
-### Using "ModelSerializers" (Extend Serializer)
+### "ListSerializer" (Extend BaseSerializer)
+- serialize multiple model
+- will be instantiated if serializer set "many=True"
+
+### "ModelSerializer" (Extend Serializer)
 - more concise
 - automatically determined set of fields
 - default implementations for the "create()" and "update()" methods
+
+### "HyperlinkedModelSerializer" (Extend ModelSerializer)
+- 
+
 
 ## Working with Serializer
 ## Serialization - "Model" to "JSON"
@@ -62,18 +71,4 @@ serializer.validated_data
 # OrderedDict([('title', ''), ('code', 'print("hello, world")\n'), ('linenos', False), ('language', 'python'), ('style', 'friendly')])
 serializer.save()
 # <Snippet: Snippet object> (model instance)
-```
-
-## Working ModelSerializer
-```python
-from snippets.serializers import SnippetSerializer
-serializer = SnippetSerializer()
-print(repr(serializer))  # define a serializer which have what fields..., like define a Django's Form Object
-# SnippetSerializer():
-#    id = IntegerField(label='ID', read_only=True)
-#    title = CharField(allow_blank=True, max_length=100, required=False)
-#    code = CharField(style={'base_template': 'textarea.html'})
-#    linenos = BooleanField(required=False)
-#    language = ChoiceField(choices=[('Clipper', 'FoxPro'), ('Cucumber', 'Gherkin'), ('RobotFramework', 'RobotFramework'), ('abap', 'ABAP'), ('ada', 'Ada')...
-#    style = ChoiceField(choices=[('autumn', 'autumn'), ('borland', 'borland'), ('bw', 'bw'), ('colorful', 'colorful')...
 ```

@@ -8,14 +8,14 @@ from tutorial1.models import Snippet
 from tutorial1.serializers import SnippetSerializer
 
 
-@csrf_exempt  # clients is not CSRF token, it should have one
+@csrf_exempt  # clients is not CSRF token, shut down the csrf function (danger)
 def snippet_list(request):
     """
     List all code snippets, or create a new snippet.
     """
     if request.method == 'GET':
         snippets = Snippet.objects.all()
-        serializer = SnippetSerializer(snippets, many=True)  # serialize querysets instead of model instances
+        serializer = SnippetSerializer(snippets, many=True)
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
