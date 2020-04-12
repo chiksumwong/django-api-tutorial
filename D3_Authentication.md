@@ -1,6 +1,6 @@
 # Authentication
 - Must using the Django's User Model if you want to use the Django's auth system
-
+- More Info: https://www.django-rest-framework.org/api-guide/authentication/
 ### Create User
 ```python
 user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')

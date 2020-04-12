@@ -20,7 +20,8 @@
 - default implementations for the "create()" and "update()" methods
 
 ### "HyperlinkedModelSerializer" (Extend ModelSerializer)
-- 
+- add a field "url"
+- able to click the url to redirect that record
 
 
 ## Working with Serializer
