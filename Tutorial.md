@@ -12,6 +12,9 @@
 - Using DRF's `Response` replace Django http's "HttpResponse" and "JsonResponse"
 - Using DRF's `Status` object
 
+p.s.
+- `application/x-www-form-urlencoded` (Normal Way to Submit)
+- `multipart/form-data` (Normal Way to Submit file / multi file)
 ## Wrapping API views
 - `@api_view` for function based views
 - `APIView` for class-base views

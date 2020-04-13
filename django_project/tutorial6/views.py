@@ -1,10 +1,11 @@
-from django.contrib.auth.models import User
 from rest_framework import permissions, renderers, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-
+# Model
+from django.contrib.auth.models import User
 from tutorial4.models import SnippetAuth
 from tutorial4.permissions import IsOwnerOrReadOnly
+# Serializer
 from tutorial5.serializers import SnippetSerializer, UserSerializer
 
 
