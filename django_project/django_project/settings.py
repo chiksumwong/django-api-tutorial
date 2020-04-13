@@ -27,7 +27,7 @@ SECRET_KEY = 'b-!o@fe6c$4!94h94b&)pn%5*7q%-0jscka$p61o4)sytqm8ll'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -39,7 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Third Party Apps
+    'corsheaders',
     'rest_framework',
+    'django_apscheduler',
+
+    # Local Apps
     'tutorial1',
     'tutorial2',
     'tutorial3',
@@ -47,10 +53,13 @@ INSTALLED_APPS = [
     'tutorial5',
     'tutorial6',
     'f_auth',
-    'f_file'
+    'f_file',
+    'f_schedule_job',
+    'f_system_log'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # CORS
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -139,7 +148,17 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # Add for Front-end - Vue
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'client/dist/static'),
+    os.path.join(BASE_DIR, 'client/dist/static')
+]
+
+
+# Media Files - For File and Image Upload
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# CORS
+CORS_ORIGIN_WHITELIST = [
+    'http://127.0.0.1:4000'
 ]
 
 # Host to Production

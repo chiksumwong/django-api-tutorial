@@ -27,7 +27,7 @@ class SnippetDetail(APIView):
     """
     Retrieve, update or delete a snippet instance.
     """
-    def get_object(self, pk):
+    def get_object(self, pk):  # Function for "get", "put", "delete"
         try:
             return Snippet.objects.get(pk=pk)
         except Snippet.DoesNotExist:

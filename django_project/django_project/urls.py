@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from django.contrib import admin
 from django.urls import path, include
@@ -26,6 +28,9 @@ urlpatterns = [
     path('t3/', include('tutorial3.urls')),
     path('t4/', include('tutorial4.urls')),
     path('t5/', include('tutorial5.urls')),
-    path('t6/', include('tutorial6.urls'))
+    path('t6/', include('tutorial6.urls')),
+    path('api/', include('f_file.urls'))
 ]
 
+# read the files by url, if the files cannot preview, it will be downloaded
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
