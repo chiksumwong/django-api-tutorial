@@ -29,7 +29,8 @@ urlpatterns = [
     path('t4/', include('tutorial4.urls')),
     path('t5/', include('tutorial5.urls')),
     path('t6/', include('tutorial6.urls')),
-    path('api/', include('f_file.urls'))
+    path('api/', include('f_file.urls')),
+    path('api/app/', include('a_shop.urls'))
 ]
 
 # read the files by url, if the files cannot preview, it will be downloaded

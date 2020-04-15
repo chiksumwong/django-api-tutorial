@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'f_auth',
     'f_file',
     'f_schedule_job',
-    'f_system_log'
+    'f_system_log',
+    'a_shop'
 ]
 
 MIDDLEWARE = [
