@@ -87,6 +87,22 @@
                   </div>
                 </router-link>
               </b-nav-item>
+              <!-- Product -->
+              <b-nav-item v-show="!isLogin">
+                <router-link to="/products">
+                  <div class="nav-item">
+                    Products
+                  </div>
+                </router-link>
+              </b-nav-item>
+              <!-- Create Product -->
+              <b-nav-item v-show="!isLogin">
+                <router-link to="/product/create">
+                  <div class="nav-item">
+                    Create Products
+                  </div>
+                </router-link>
+              </b-nav-item>
             </b-navbar-nav>
           </b-collapse>
         </div>
