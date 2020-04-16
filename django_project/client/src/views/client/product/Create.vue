@@ -1,5 +1,6 @@
 <template>
   <b-container>
+    <h1>Create Product</h1>
     <div>
       <b-form>
         <b-form-group label="Product name:">
@@ -15,7 +16,9 @@
         </b-form-group>
 
         <b-button @click="submit()" variant="primary">Submit</b-button>
-        <b-button @click="reset()" variant="danger">Reset</b-button>
+        <b-button @click="reset()" variant="danger" class="ml-1"
+          >Reset</b-button
+        >
       </b-form>
     </div>
   </b-container>

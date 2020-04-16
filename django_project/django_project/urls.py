@@ -12,9 +12,9 @@ urlpatterns = [
     path('t4/', include('tutorial4.urls')),
     path('t5/', include('tutorial5.urls')),
     path('t6/', include('tutorial6.urls')),
-    path('api/', include('f_file.urls')),
+    path('api/upload/', include('f_file.urls')),
     path('api/app/', include('a_shop.urls')),
-    re_path(r'^.*$', TemplateView.as_view(template_name="index.html"))
+    re_path(r'^((?!media).)*$', TemplateView.as_view(template_name="index.html"))
 ]
 
 # Files

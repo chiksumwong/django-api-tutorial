@@ -19,7 +19,7 @@ module.exports = {
           from: path.join(__dirname, "/public"),
           to: path.join(__dirname, "/dist/static"),
           toType: "dir",
-          ignore: ["index.html", ".DS_Store"]
+          ignore: ["index.html"]
         }
       ])
     ]

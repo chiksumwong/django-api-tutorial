@@ -1,7 +1,10 @@
+import uuid
+
 from django.db import models
 
 
 class File(models.Model):
+    file_id = models.UUIDField(primary_key=True, auto_created=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=100)
     file = models.FileField(upload_to='documents', blank=False, null=False)
 

@@ -1,14 +1,15 @@
 <template>
   <b-container>
-      <h1>
-          List all Files
-      </h1>
-      <li v-for="(item, index) in files" :key="index">
-      <p>{{item.id}}</p>
-      <p>{{item.title}}</p>
-      <p>{{item.file}}</p>
-      <a :href="item.file">Link</a>
-    </li>
+    <h1>
+      List all Files
+    </h1>
+    <div v-for="(item, index) in files" :key="index">
+      <b-card :title="item.title">
+        <b-card-text>{{ item.file }}</b-card-text>
+        <b-card-text>{{ item.created_at }}</b-card-text>
+        <a :href="item.file">Link</a>
+      </b-card>
+    </div>
   </b-container>
 </template>
 
