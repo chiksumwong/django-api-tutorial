@@ -15,6 +15,7 @@ urlpatterns = [
     path('api/upload/', include('f_file.urls')),
     path('api/app/', include('a_shop.urls')),
     path('api/function/', include('f_system_log.urls')),
+    path('api/function/sync/', include('f_schedule_job.urls')),
     re_path(r'^((?!media).)*$', TemplateView.as_view(template_name="index.html"))
 ]
 
