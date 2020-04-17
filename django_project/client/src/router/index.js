@@ -5,10 +5,11 @@ import ClientLayout from "@/views/app/ClientLayout";
 
 import ClientHome from "@/views/client/Home";
 
-import ProductCreate from "@/views/client/product/Create";
-import ProductUpdate from "@/views/client/product/Update";
-import Product from "@/views/client/product/Product";
-import Products from "@/views/client/product/Products";
+import Registration from "@/views/client/Registration";
+
+import ProductRoutes from "./product";
+import ApplicationRoutes from "./application";
+import SystemLogRoutes from "./system_log";
 
 Vue.use(VueRouter);
 
@@ -23,25 +24,13 @@ const routes = [
         component: ClientHome
       },
       {
-        path: "products",
-        name: "products",
-        component: Products
+        path: "register",
+        name: "registration",
+        component: Registration
       },
-      {
-        path: "product/create",
-        name: "product_create",
-        component: ProductCreate
-      },
-      {
-        path: "product/:id",
-        name: "product",
-        component: Product
-      },
-      {
-        path: "product/update/:id",
-        name: "product_update",
-        component: ProductUpdate
-      }
+      ...ProductRoutes,
+      ...ApplicationRoutes,
+      ...SystemLogRoutes
     ]
   },
   {

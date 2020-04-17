@@ -103,6 +103,38 @@
                   </div>
                 </router-link>
               </b-nav-item>
+              <!-- Create Application -->
+              <b-nav-item v-show="!isLogin">
+                <router-link to="/application/create">
+                  <div class="nav-item">
+                    Create Application
+                  </div>
+                </router-link>
+              </b-nav-item>
+              <!-- Application -->
+              <b-nav-item v-show="!isLogin">
+                <router-link to="/applications">
+                  <div class="nav-item">
+                    Application
+                  </div>
+                </router-link>
+              </b-nav-item>
+              <!-- System Log -->
+              <b-nav-item v-show="!isLogin">
+                <router-link to="/system_logs">
+                  <div class="nav-item">
+                    System Log
+                  </div>
+                </router-link>
+              </b-nav-item>
+              <!-- Registration -->
+              <b-nav-item v-show="!isLogin">
+                <router-link to="/register">
+                  <div class="nav-item">
+                    Registrations
+                  </div>
+                </router-link>
+              </b-nav-item>
             </b-navbar-nav>
           </b-collapse>
         </div>
@@ -122,7 +154,7 @@ export default {
       lang_tw: false,
       lang_cn: true,
       lang_s1: true,
-      lang_s2: false,
+      lang_s2: false
     };
   },
   mounted() {
@@ -222,7 +254,7 @@ export default {
     switchLang(lang) {
       this.$i18n.locale = lang;
       localStorage.setItem("locale", lang);
-    },
+    }
     // logout() {
     //   this.$store.dispatch("user/logout");
     // }

@@ -14,6 +14,7 @@ urlpatterns = [
     path('t6/', include('tutorial6.urls')),
     path('api/upload/', include('f_file.urls')),
     path('api/app/', include('a_shop.urls')),
+    path('api/function/', include('f_system_log.urls')),
     re_path(r'^((?!media).)*$', TemplateView.as_view(template_name="index.html"))
 ]
 

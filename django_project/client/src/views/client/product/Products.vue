@@ -20,10 +20,10 @@ export default {
     };
   },
   mounted() {
-    this.loadFiles();
+    this.loadProducts();
   },
   methods: {
-    async loadFiles() {
+    async loadProducts() {
       const res = await ProductAPI.listProducts();
       if (res.data) {
         this.products = res.data;

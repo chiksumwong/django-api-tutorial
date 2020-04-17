@@ -1,4 +1,7 @@
-from rest_framework import viewsets
+from django.http import Http404
+from rest_framework import viewsets, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from a_shop.serializers import *
 
@@ -26,3 +29,8 @@ class ProductViewSet(viewsets.ModelViewSet):
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+
+
+class ApplicationViewSet(viewsets.ModelViewSet):
+    queryset = Application.objects.all()
+    serializer_class = ApplicationSerializer
