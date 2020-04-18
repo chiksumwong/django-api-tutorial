@@ -6,5 +6,5 @@ router = DefaultRouter()
 router.register(r'log', views.SystemLogViewSet)
 
 urlpatterns = [
-    path('system_log/', include(router.urls)),
+    path('', include(router.urls)),
 ]

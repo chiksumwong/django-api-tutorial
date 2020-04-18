@@ -41,9 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third Party Apps
-    'corsheaders',
-    'rest_framework',
-    'django_apscheduler',
+    'corsheaders',  # CORS
+    'rest_framework',  # API
+    'django_apscheduler',  # Scheduler
+    'oauth2_provider',  # oAuth
 
     # Local Apps
     'tutorial1',
@@ -161,6 +162,25 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:4000'
 ]
+
+
+# oAuth
+OAUTH2_PROVIDER = {
+    # this is the list of available scopes
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
+}
+
+
+# API
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication'  # oAuth
+    ],
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated'  # oAuth
+    )
+}
+
 
 # Host to Production
 if ENVIRONMENT == 'production':

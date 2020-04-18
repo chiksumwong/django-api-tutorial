@@ -2,19 +2,19 @@ import Vue from "vue";
 
 const ApplicationAPI = {
   //List
-  listApplications: () => Vue.prototype.$axios.get("/app/shop/application/"),
+  listApplications: () => Vue.prototype.$axios.get("/a/shop/application/"),
   createApplication: payload =>
-    Vue.prototype.$axios.post("/app/shop/application/", payload),
+    Vue.prototype.$axios.post("/a/shop/application/", payload),
   //Detail
   retrieveApplication: applicationId =>
-    Vue.prototype.$axios.get("/app/shop/application/" + applicationId + "/"),
+    Vue.prototype.$axios.get("/a/shop/application/" + applicationId + "/"),
   updateApplication: (applicationId, payload) =>
     Vue.prototype.$axios.put(
-      "/app/shop/application/" + applicationId + "/",
+      "/a/shop/application/" + applicationId + "/",
       payload
     ),
   deleteApplication: applicationId =>
-    Vue.prototype.$axios.delete("/app/shop/application/" + applicationId + "/")
+    Vue.prototype.$axios.delete("/a/shop/application/" + applicationId + "/")
 };
 
 export default ApplicationAPI;
