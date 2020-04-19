@@ -35,21 +35,22 @@ const instance = axios.create({
     "Content-Type": "application/json"
   }
 });
-// instance.interceptors.request.use(
-//  (config) => {
-//    let token = localStorage.getItem('token');
+instance.interceptors.request.use(
+  config => {
+    // let token = localStorage.getItem("token");
+    let token = "kujL1fzftyjDWH47DG8sL7jz9W91aI";
 
-//    if (token) {
-//      const authToken = 'Bearer ' + token
-//      config.headers['Authorization'] = authToken
-//    }
+    if (token) {
+      const authToken = "Bearer " + token;
+      config.headers["Authorization"] = authToken;
+    }
 
-//    return config
-//  },
-//  (error) => {
-//    return Promise.reject(error)
-//  }
-// )
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
 Vue.prototype.$axios = instance;
 
 Vue.config.productionTip = false;

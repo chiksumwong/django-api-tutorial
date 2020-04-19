@@ -36,3 +36,4 @@ class OrderViewSet(viewsets.ModelViewSet):
 class ApplicationViewSet(viewsets.ModelViewSet):
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
+    permission_classes = [permissions.IsAuthenticated]
