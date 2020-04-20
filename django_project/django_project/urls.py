@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 
 urlpatterns = [
-    path('admin/', admin.site.urls),  # for dev, comment for production
+    # path('admin/', admin.site.urls),  # for dev, comment for production
     path('t1/', include('tutorial1.urls')),
     path('t2/', include('tutorial2.urls')),
     path('t3/', include('tutorial3.urls')),
