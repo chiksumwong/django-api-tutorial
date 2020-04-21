@@ -35,36 +35,36 @@
               <div id="font-size">
                 <div
                   id="fs-s"
-                  @click="font_small()"
+                  @click="font('s')"
                   :class="[fs_s ? 'font-size-active' : '']"
                 >
                   A
                 </div>
                 <div
                   id="fs-m"
-                  @click="font_middle()"
+                  @click="font('m')"
                   :class="[fs_m ? 'font-size-active' : '']"
                 >
                   A
                 </div>
                 <div
                   id="fs-l"
-                  @click="font_large()"
+                  @click="font('l')"
                   :class="[fs_l ? 'font-size-active' : '']"
                 >
                   A
                 </div>
               </div>
               <div id="language" class="row">
-                <div id="lang-en" v-show="lang_en" @click="switch_en()">
+                <div id="lang-en" v-show="l_en" @click="lang('en')">
                   English
                 </div>
-                <div v-show="lang_s1">|</div>
-                <div id="lang-tw" v-show="lang_tw" @click="switch_tw()">
+                <div v-show="l_s1">|</div>
+                <div id="lang-tw" v-show="l_tw" @click="lang('tw')">
                   繁體
                 </div>
-                <div v-show="lang_s2">|</div>
-                <div id="lang-cn" v-show="lang_cn" @click="switch_cn()">
+                <div v-show="l_s2">|</div>
+                <div id="lang-cn" v-show="l_cn" @click="lang('cn')">
                   简体
                 </div>
               </div>
@@ -81,25 +81,13 @@
             <b-navbar-nav class="ml-auto">
               <!-- Login -->
               <b-nav-item v-show="!isLogin">
-                <router-link to="/login">
-                  <div class="nav-item">
-                    {{ $t("nav.login") }}
-                  </div>
-                </router-link>
+                <button @click="login()">{{ $t("nav.login") }}</button>
               </b-nav-item>
               <!-- Product -->
               <b-nav-item v-show="!isLogin">
                 <router-link to="/products">
                   <div class="nav-item">
                     Products
-                  </div>
-                </router-link>
-              </b-nav-item>
-              <!-- Create Product -->
-              <b-nav-item v-show="!isLogin">
-                <router-link to="/product/create">
-                  <div class="nav-item">
-                    Create Products
                   </div>
                 </router-link>
               </b-nav-item>
@@ -111,22 +99,6 @@
                   </div>
                 </router-link>
               </b-nav-item>
-              <!-- Application -->
-              <b-nav-item v-show="!isLogin">
-                <router-link to="/applications">
-                  <div class="nav-item">
-                    Application
-                  </div>
-                </router-link>
-              </b-nav-item>
-              <!-- System Log -->
-              <b-nav-item v-show="!isLogin">
-                <router-link to="/system_logs">
-                  <div class="nav-item">
-                    System Log
-                  </div>
-                </router-link>
-              </b-nav-item>
               <!-- Registration -->
               <b-nav-item v-show="!isLogin">
                 <router-link to="/register">
@@ -135,6 +107,22 @@
                   </div>
                 </router-link>
               </b-nav-item>
+              <!-- Drapdown - Admin -->
+              <b-nav-item-dropdown text="Admin" right>
+                <b-dropdown-item @click="route_to('/system_logs')"
+                  >System Log</b-dropdown-item
+                >
+                <b-dropdown-item @click="route_to('/applications')"
+                  >Application</b-dropdown-item
+                >
+                <b-dropdown-item @click="route_to('/product/create')"
+                  >Create Products</b-dropdown-item
+                >
+                <b-dropdown-item @click="route_to('/files')"
+                  >Files</b-dropdown-item
+                >
+              </b-nav-item-dropdown>
+              <!-- End - Drapdown - Admin -->
             </b-navbar-nav>
           </b-collapse>
         </div>
@@ -145,115 +133,18 @@
 
 <script>
 export default {
-  data() {
-    return {
-      fs_s: false,
-      fs_m: true,
-      fs_l: false,
-      lang_en: true,
-      lang_tw: false,
-      lang_cn: true,
-      lang_s1: true,
-      lang_s2: false
-    };
-  },
-  mounted() {
-    let size = localStorage.getItem("size");
-    if (size === "s") {
-      this.font_small();
-    } else if (size === "m") {
-      this.font_middle();
-    } else if (size === "l") {
-      this.font_large();
-    } else {
-      this.font_middle();
-      localStorage.setItem("size", "m");
-    }
-    let lang = localStorage.getItem("locale");
-    if (lang === "tw") {
-      this.switch_tw();
-      this.$store.dispatch("system/switchLang", "tw");
-    } else if (lang === "en") {
-      this.switch_en();
-      this.$store.dispatch("system/switchLang", "en");
-    } else if (lang === "cn") {
-      this.switch_cn();
-      this.$store.dispatch("system/switchLang", "cn");
-    } else {
-      this.switch_tw;
-      localStorage.setItem("locale", "tw");
-    }
-  },
   methods: {
     route_to(path) {
       this.$router.push(path);
     },
-    font_small() {
-      this.fs_s = false;
-      this.fs_m = false;
-      this.fs_l = false;
-      this.fs_s = true;
-      document.querySelector("html").style.fontSize = "12px";
-      localStorage.setItem("size", "s");
+    font(size) {
+      this.$store.dispatch("system/setFontSize", size);
     },
-    font_middle() {
-      this.fs_s = false;
-      this.fs_m = false;
-      this.fs_l = false;
-      this.fs_m = true;
-      document.querySelector("html").style.fontSize = "15px";
-      localStorage.setItem("size", "m");
+    lang(lang) {
+      this.$store.dispatch("system/setLanguage", lang);
     },
-    font_large() {
-      this.fs_s = false;
-      this.fs_m = false;
-      this.fs_l = false;
-      this.fs_l = true;
-      document.querySelector("html").style.fontSize = "17px";
-      localStorage.setItem("size", "l");
-    },
-    switch_en() {
-      this.lang_en = false;
-      this.lang_tw = false;
-      this.lang_cn = false;
-      this.lang_s1 = false;
-      this.lang_s2 = false;
-      this.lang_tw = true;
-      this.lang_s2 = true;
-      this.lang_cn = true;
-      this.switchLang("en");
-      localStorage.setItem("locale", "en");
-      this.$store.dispatch("system/switchLang", "en");
-    },
-    switch_tw() {
-      this.lang_en = false;
-      this.lang_tw = false;
-      this.lang_cn = false;
-      this.lang_s1 = false;
-      this.lang_s2 = false;
-      this.lang_en = true;
-      this.lang_s2 = true;
-      this.lang_cn = true;
-      this.switchLang("tw");
-      localStorage.setItem("locale", "tw");
-      this.$store.dispatch("system/switchLang", "tw");
-    },
-    switch_cn() {
-      this.lang_en = false;
-      this.lang_tw = false;
-      this.lang_cn = false;
-      this.lang_s1 = false;
-      this.lang_s2 = false;
-      this.lang_en = true;
-      this.lang_s1 = true;
-      this.lang_tw = true;
-      this.switchLang("cn");
-      localStorage.setItem("locale", "cn");
-      this.$store.dispatch("system/switchLang", "cn");
-    },
-    switchLang(lang) {
-      this.$i18n.locale = lang;
-      localStorage.setItem("locale", lang);
+    login() {
+      this.$store.dispatch("user/login", { user: "fake" });
     }
     // logout() {
     //   this.$store.dispatch("user/logout");
@@ -267,6 +158,30 @@ export default {
     isAdmin() {
       // return this.$store.state.user.isAdmin;
       return false;
+    },
+    fs_s() {
+      return this.$store.state.system.fs_s;
+    },
+    fs_m() {
+      return this.$store.state.system.fs_m;
+    },
+    fs_l() {
+      return this.$store.state.system.fs_l;
+    },
+    l_en() {
+      return this.$store.state.system.l_en;
+    },
+    l_tw() {
+      return this.$store.state.system.l_tw;
+    },
+    l_cn() {
+      return this.$store.state.system.l_cn;
+    },
+    l_s1() {
+      return this.$store.state.system.l_s1;
+    },
+    l_s2() {
+      return this.$store.state.system.l_s2;
     }
   }
 };

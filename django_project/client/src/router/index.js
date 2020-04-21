@@ -2,14 +2,15 @@ import Vue from "vue";
 // import { store } from "@/store";
 import VueRouter from "vue-router";
 import ClientLayout from "@/views/app/ClientLayout";
-
-import ClientHome from "@/views/client/Home";
+import DashboardLayout from "@/views/app/DashboardLayout";
+import ClientHome from "@/views/client/product/Products";
+import DashboardHome from "@/views/dashboard/Home";
+import Files from "@/views/client/Files";
+import ProductRoutes from "./client/product";
+import ApplicationRoutes from "./client/application";
+import SystemLogRoutes from "./dashboard/system_log";
 
 import Registration from "@/views/client/Registration";
-
-import ProductRoutes from "./product";
-import ApplicationRoutes from "./application";
-import SystemLogRoutes from "./system_log";
 
 Vue.use(VueRouter);
 
@@ -28,9 +29,25 @@ const routes = [
         name: "registration",
         component: Registration
       },
+      {
+        path: "files",
+        name: "files",
+        component: Files
+      },
       ...ProductRoutes,
       ...ApplicationRoutes,
       ...SystemLogRoutes
+    ]
+  },
+  {
+    path: "/dashboard",
+    component: DashboardLayout,
+    children: [
+      {
+        path: "",
+        name: "dashboard_home",
+        component: DashboardHome
+      }
     ]
   },
   {
@@ -74,7 +91,7 @@ export const router = new VueRouter({
 //   const authRequired = publicPages.includes(to.name);
 //   const authAdminRequired = adminPages.includes(to.name);
 //   const authUserRequired = userPages.includes(to.name);
-//   const loggedIn = localStorage.getItem("token");
+//   const loggedIn = this.$store.state.user.t;
 //   const isAdmin = store.state.user.isAdmin;
 
 //   if (loggedIn) {

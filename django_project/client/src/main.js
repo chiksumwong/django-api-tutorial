@@ -1,7 +1,9 @@
 import Vue from "vue";
 import App from "./App.vue";
+import { i18n } from "./i18n";
 import { router } from "./router";
 import { store } from "./store";
+import "./api";
 
 //Bootstrap
 import BootstrapVue from "bootstrap-vue";
@@ -13,46 +15,7 @@ Vue.use(BootstrapVue);
 import Vuelidate from "vuelidate";
 Vue.use(Vuelidate);
 
-//i18n
-import VueI18n from "vue-i18n";
-import en from "./i18n/en/lang";
-import tw from "./i18n/zh-TW/lang";
-import cn from "./i18n/zh-CN/lang";
-Vue.use(VueI18n);
-const locale = localStorage.getItem("locale") || "tw";
-const i18n = new VueI18n({
-  locale,
-  messages: { en, tw, cn }
-});
-
-// Axios
-import axios from "axios";
-const instance = axios.create({
-  // baseURL: (process.env.VUE_APP_BASE_URL !== undefined) ? process.env.VUE_APP_BASE_URL : 'http://localhost:3000/api/v1/'
-  // baseURL: process.env.VUE_APP_BASE_API,
-  baseURL: "http://127.0.0.1:8000/api/",
-  headers: {
-    "Content-Type": "application/json"
-  }
-});
-instance.interceptors.request.use(
-  config => {
-    // let token = localStorage.getItem("token");
-    let token = "kujL1fzftyjDWH47DG8sL7jz9W91aI";
-
-    if (token) {
-      const authToken = "Bearer " + token;
-      config.headers["Authorization"] = authToken;
-    }
-
-    return config;
-  },
-  error => {
-    return Promise.reject(error);
-  }
-);
-Vue.prototype.$axios = instance;
-
+// Vue
 Vue.config.productionTip = false;
 
 new Vue({

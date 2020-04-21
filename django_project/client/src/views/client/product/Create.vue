@@ -55,6 +55,7 @@ export default {
         this.$router.push("/products");
       } else {
         console.log("Fail", res.err);
+        this.$router.push("/");
       }
     }
   }
