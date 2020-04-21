@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <div>
     this is dashboard home page
-  </b-container>
+  </div>
 </template>

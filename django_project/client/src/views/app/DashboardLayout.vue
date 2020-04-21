@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Sidebar />
     <Navbar />
     <div class="content">
       <router-view></router-view>
@@ -9,13 +10,15 @@
 </template>
 
 <script>
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/dashboard_layout/Navbar";
+import Footer from "@/components/dashboard_layout/Footer";
+import Sidebar from "@/components/dashboard_layout/Sidebar";
 
 export default {
   components: {
     Navbar,
-    Footer
+    Footer,
+    Sidebar
   }
 };
 </script>
