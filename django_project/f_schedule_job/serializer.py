@@ -1,7 +1,7 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from rest_framework import serializers
 
-from f_schedule_job.models import ScheduleJob
+from f_schedule_job.models import SyncTask
 
 scheduler = BackgroundScheduler()
 
@@ -13,7 +13,7 @@ def job_by_custom(s):
 
 class ScheduleJobSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ScheduleJob
+        model = SyncTask
         fields = '__all__'
 
     def create(self, validated_data):

@@ -1,7 +1,10 @@
+import json
+
 from rest_framework import serializers
 
 from a_shop.models import *
 from f_system_log.models import SystemLog
+from f_schedule_job.models import SyncTask
 
 
 class MayorSerializer(serializers.ModelSerializer):
@@ -56,10 +59,27 @@ class ApplicationSerializer(serializers.ModelSerializer):
     #     return value
 
     def create(self, validated_data):
+        customer_name = validated_data.get('customer_name')
+
+        # Create System Log
         log = SystemLog(log='Create User', message=validated_data.get('customer_name') + ' is created')
         log.save()
 
-        ap = Application(customer_name=validated_data.get('customer_name'))
+        # Create Application
+        ap = Application(customer_name=customer_name)
         ap.save()
+
+        # Get Application's id, customer, created at
+        print('Application Customer Name: ', ap.customer_name)
+        print('Application ID:', ap.application_id)
+        print('Application Create At: ', ap.created_at)
+        # create a api request to schedule job
+        x = {
+            'application_id': str(ap.application_id),
+            'customer': ap.customer_name,
+            'timestamp': str(ap.created_at)
+        }
+        sj = SyncTask(category=0, action=1, parameters=json.dumps(x))
+        sj.save()
 
         return ap

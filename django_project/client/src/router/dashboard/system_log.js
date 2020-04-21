@@ -1,7 +1,7 @@
 // import SystemLogCreate from "@/views/client/system_log/Create";
 // import SystemLogUpdate from "@/views/client/system_log/Update";
 // import SystemLog from "@/views/client/system_log/SystemLog";
-import SystemLogs from "@/views/client/system_log/SystemLogs";
+import SystemLogs from "@/views/dashboard/system_log/SystemLogs";
 
 export default [
   {

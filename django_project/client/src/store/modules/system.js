@@ -3,11 +3,11 @@ import { i18n } from "@/i18n";
 export default {
   namespaced: true,
   state: {
-    l: "tw", // Language
-    s: "m", // Font Size
+    fs: "m", // Font Size
     fs_s: false,
     fs_m: true,
     fs_l: false,
+    l: "tw", // Language
     l_en: true,
     l_tw: false,
     l_cn: true,
@@ -46,19 +46,19 @@ export default {
       state.fs_m = false;
       state.fs_l = false;
       state.fs_l = false;
-      state.s = "s";
+      state.fs = "s";
     },
     switchFM(state) {
       state.fs_s = false;
       state.fs_m = true;
       state.fs_l = false;
-      state.s = "m";
+      state.fs = "m";
     },
     switchFL(state) {
       state.fs_s = false;
       state.fs_m = false;
       state.fs_l = true;
-      state.s = "l";
+      state.fs = "l";
     },
     switchTW(state) {
       state.l_en = true;
