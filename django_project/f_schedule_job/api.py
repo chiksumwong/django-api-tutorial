@@ -77,6 +77,16 @@ def create_application_record(application_id, customer, timestamp):
     print('Drangoce Response: ', r)
 
 
+def create_application_record_work_version(application_id, customer, timestamp):
+    res_dict = init_application_record()
+    tmp_record_id = res_dict.get('tmp_record_id')
+    print('Get Tep Record ID: ', tmp_record_id)
+    timestamp = "1587462949"
+    payload = 'environment='+environment+'&app='+appShop+'&page='+pageApplication+'&form_id='+fApplication+'&tmp_record_id=' + tmp_record_id + '&action=workflow&workflow_id='+bSubmit+'&data=%7B%22R_hs2o3a%22%3A%20%7B%22sec%22%3A%20' + timestamp + '%2C%20%22usec%22%3A%200%7D%2C%20%22R_pr72wp%22%3A%20%22' + application_id + '%22%2C%20%22R_y3aqa2%22%3A%20%22' + customer + '%22%7D '
+    response = requests.request("POST", commitRecordURL, headers=headers, data=payload)
+    print(response.text.encode('utf8'))
+
+
 def push_application_record():
     url = listTableURL
     headers = {
@@ -110,29 +120,5 @@ def get_application_table():
 
 
 if __name__ == '__main__':
-
-    # # get_application_table()
-    res_dict = init_application_record()
-    tmp_record_id = res_dict.get('tmp_record_id')
-    print('Get Tep Record ID: ', tmp_record_id)
-    # time.sleep(2)
-    # body = {
-    #     'environment': environment,
-    #     'app': appShop,
-    #     'page': pageApplication,
-    #     'form_id': fApplication,
-    #     'action': 'workflow',
-    #     'tmp_record_id': tmp_record_id,
-    #     'data': {"R_pr72wp": "QQ"}
-    # }
-    # # Get the status = "ok"
-    # print('Input Body: ', body)
-    # r2 = requests.post(commitRecordURL, data=body, headers=headers)
-    # print('Drangoce Response: ', r2.text)
-    # create_application_record("df", "dfd", "df")
-    timestamp = "1587462949"
-    application_id = 'not bad'
-    customer = 'Sam'
-    payload = 'environment=developing&app=App136032&page=Page161832&form_id=R_i40o40&tmp_record_id='+tmp_record_id+'&action=workflow&workflow_id=Eutrkrvq&data=%7B%22R_hs2o3a%22%3A%20%7B%22sec%22%3A%20'+timestamp+'%2C%20%22usec%22%3A%200%7D%2C%20%22R_pr72wp%22%3A%20%22'+application_id+'%22%2C%20%22R_y3aqa2%22%3A%20%22'+customer+'%22%7D '
-    response = requests.request("POST", commitRecordURL, headers=headers, data=payload)
-    print(response.text.encode('utf8'))
+    # get_application_table()
+    create_application_record_work_version()

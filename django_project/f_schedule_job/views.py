@@ -10,7 +10,7 @@ from rest_framework.response import Response
 from f_schedule_job.models import SyncTask
 from f_schedule_job.serializer import ScheduleJobSerializer
 
-from f_schedule_job.api import create_application_record
+from f_schedule_job.api import create_application_record, create_application_record_work_version
 
 scheduler = BackgroundScheduler()   # Instantiate scheduler
 scheduler.add_jobstore(DjangoJobStore(), 'default')   # The scheduler uses the default DjangoJobStore ()
@@ -24,7 +24,7 @@ def job_by_seconds():
         if i.category == 0:  # application
             if i.action == 1:  # create
                 d = json.loads(i.parameters)  # get parameters
-                create_application_record(d['application_id'], d['customer'], d['timestamp'])
+                create_application_record_work_version(d['application_id'], d['customer'], d['timestamp'])
         elif i.category == 1:
             print(i.action)
 

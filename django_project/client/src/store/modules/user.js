@@ -20,7 +20,7 @@ export default {
         let fake_data = {
           user_name: "fake name", //user name
           user_id: null, //id
-          token: "czhbkssNADrbkg73J47G7cuBflpmBG", //token
+          token: "XVMaXISzosN89QxaOpfeq9LtITpMAi", //token
           isAdmin: false // is admin
         };
         commit("loginSuccess", fake_data);
