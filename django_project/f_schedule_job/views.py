@@ -16,7 +16,7 @@ scheduler = BackgroundScheduler()   # Instantiate scheduler
 scheduler.add_jobstore(DjangoJobStore(), 'default')   # The scheduler uses the default DjangoJobStore ()
 
 
-@register_job(scheduler, "interval", seconds=60*1, id='job_by_seconds')  # interval way each 15 mines
+@register_job(scheduler, "interval", seconds=60*60, id='job_by_seconds')  # interval way each 15 mines
 def job_by_seconds():
     print("I'm a sync job!")
     sjs = SyncTask.objects.filter(status=1)

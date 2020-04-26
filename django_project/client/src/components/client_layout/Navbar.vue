@@ -79,14 +79,6 @@
           <!-- Links -->
           <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav class="ml-auto">
-              <!-- Login -->
-              <b-nav-item v-show="!isLogin">
-                <router-link to="/login">
-                  <div class="nav-item">
-                    Login
-                  </div>
-                </router-link>
-              </b-nav-item>
               <!-- Product -->
               <b-nav-item v-show="!isLogin">
                 <router-link to="/products">
@@ -96,10 +88,18 @@
                 </router-link>
               </b-nav-item>
               <!-- Create Application -->
-              <b-nav-item v-show="!isLogin">
+              <!-- <b-nav-item v-show="!isLogin">
                 <router-link to="/application/create">
                   <div class="nav-item">
                     Create Application
+                  </div>
+                </router-link>
+              </b-nav-item> -->
+              <!-- Login -->
+              <b-nav-item v-show="!isLogin">
+                <router-link to="/login">
+                  <div class="nav-item">
+                    Login
                   </div>
                 </router-link>
               </b-nav-item>
@@ -107,7 +107,7 @@
               <b-nav-item v-show="!isLogin">
                 <router-link to="/register">
                   <div class="nav-item">
-                    Registrations
+                    Registration
                   </div>
                 </router-link>
               </b-nav-item>
