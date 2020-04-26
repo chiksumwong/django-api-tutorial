@@ -9,8 +9,9 @@ import createPersistedState from "vuex-persistedstate";
 //   encryptionSecret: "s3cs5d4f6sd4!@$a$$w0rd@123"
 // });
 
-// import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 // const in1Hour = 1 / 12;
+const in1day = 1;
 
 import system from "@/store/modules/system";
 import user from "@/store/modules/user";
@@ -22,7 +23,11 @@ export const store = new Vuex.Store({
     system,
     user
   },
-  plugins: [createPersistedState()]
+  // plugins: [
+  //   createPersistedState({
+  //     key: "s"
+  //   })
+  // ]
   // plugins: [
   //   createPersistedState({
   //     storage: {
@@ -32,13 +37,14 @@ export const store = new Vuex.Store({
   //     }
   //   })
   // ]
-  // plugins: [
-  //   createPersistedState({
-  //     storage: {
-  //       getItem: key => Cookies.get(key),
-  //       setItem: (key, value) => Cookies.set(key, value, { expires: in1Hour }),
-  //       removeItem: key => Cookies.remove(key)
-  //     }
-  //   })
-  // ]
+  plugins: [
+    createPersistedState({
+      key: "s",
+      storage: {
+        getItem: key => Cookies.get(key),
+        setItem: (key, value) => Cookies.set(key, value, { expires: in1day }),
+        removeItem: key => Cookies.remove(key)
+      }
+    })
+  ]
 });

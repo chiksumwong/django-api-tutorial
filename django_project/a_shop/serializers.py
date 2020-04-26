@@ -3,7 +3,7 @@ import json
 from rest_framework import serializers
 
 from a_shop.models import *
-from f_system_log.models import SystemLog
+from f_system_log.models import AuditLog
 from f_schedule_job.models import SyncTask
 
 
@@ -62,7 +62,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
         customer_name = validated_data.get('customer_name')
 
         # Create System Log
-        log = SystemLog(log='Create User', message=validated_data.get('customer_name') + ' is created')
+        log = AuditLog(message=validated_data.get('customer_name') + ' is created')
         log.save()
 
         # Create Application

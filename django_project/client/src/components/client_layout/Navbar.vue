@@ -81,7 +81,11 @@
             <b-navbar-nav class="ml-auto">
               <!-- Login -->
               <b-nav-item v-show="!isLogin">
-                <button @click="login()">{{ $t("nav.login") }}</button>
+                <router-link to="/login">
+                  <div class="nav-item">
+                    Login
+                  </div>
+                </router-link>
               </b-nav-item>
               <!-- Product -->
               <b-nav-item v-show="!isLogin">
@@ -143,12 +147,11 @@ export default {
     lang(lang) {
       this.$store.dispatch("system/setLanguage", lang);
     },
-    login() {
-      this.$store.dispatch("user/login", { user: "fake" });
+    logout() {
+      this.$store.dispatch("user/logout", {
+        user_name: this.$store.state.user.n
+      });
     }
-    // logout() {
-    //   this.$store.dispatch("user/logout");
-    // }
   },
   computed: {
     isLogin() {

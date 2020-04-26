@@ -1,6 +1,6 @@
 from rest_framework import generics
 # Model
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from rest_framework.permissions import IsAdminUser, IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from tutorial4.models import SnippetAuth
@@ -9,6 +9,8 @@ from tutorial4.serializers import UserSerializer
 from tutorial4.serializers import SnippetSerializer
 # Permission (customization)
 from tutorial4.permissions import IsOwnerOrReadOnly
+
+User = get_user_model()
 
 
 class UserList(generics.ListAPIView):  # only list all user record

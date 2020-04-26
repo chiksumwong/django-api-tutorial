@@ -10,7 +10,8 @@ import ProductRoutes from "./client/product";
 import ApplicationRoutes from "./client/application";
 import SystemLogRoutes from "./dashboard/system_log";
 
-import Registration from "@/views/client/Registration";
+import Register from "@/views/client/user/Register";
+import Login from "@/views/client/user/Login";
 
 Vue.use(VueRouter);
 
@@ -27,7 +28,12 @@ const routes = [
       {
         path: "register",
         name: "registration",
-        component: Registration
+        component: Register
+      },
+      {
+        path: "login",
+        name: "login",
+        component: Login
       },
       {
         path: "files",
