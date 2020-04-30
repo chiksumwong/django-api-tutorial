@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'oauth2_provider',  # oAuth
     # Function
     'f_auth',
-    'f_file',
     'f_schedule_job',
     'f_system_log',
     # Application
@@ -148,7 +147,8 @@ REST_FRAMEWORK = {
 
 # JWT
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    # 'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,

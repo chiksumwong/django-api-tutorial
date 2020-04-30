@@ -1,22 +1,21 @@
 import Vue from "vue";
 import Vuex from "vuex";
+Vue.use(Vuex);
+
 import createPersistedState from "vuex-persistedstate";
 
+// import Encrypter from "@/helper/encrypter";
 // import SecureLS from "secure-ls";
 // const ls = new SecureLS({
 //   encodingType: "rc4",
 //   isCompression: false,
-//   encryptionSecret: "s3cs5d4f6sd4!@$a$$w0rd@123"
+//   encryptionSecret: Encrypter.make_secret(60)
 // });
 
 // import Cookies from "js-cookie";
-// // const in1Hour = 1 / 12;
-// const in1day = 1;
 
 import system from "@/store/modules/system";
 import user from "@/store/modules/user";
-
-Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   modules: {
@@ -25,26 +24,24 @@ export const store = new Vuex.Store({
   },
   plugins: [
     createPersistedState({
-      key: "s"
+      key: "D_S"
     })
+    // createPersistedState({
+    //   key: "D_S",
+    //   storage: {
+    //     getItem: key => ls.get(key),
+    //     setItem: (key, value) => ls.set(key, value),
+    //     removeItem: key => ls.remove(key)
+    //   }
+    // })
+    // createPersistedState({
+    //   key: "D_S",
+    //   storage: {
+    //     getItem: key => Cookies.get(key),
+    //     setItem: (key, value) =>
+    //       Cookies.set(key, value, { expires: 1 }, { sameSite: "strict" }),
+    //     removeItem: key => Cookies.remove(key)
+    //   }
+    // })
   ]
-  // plugins: [
-  //   createPersistedState({
-  //     storage: {
-  //       getItem: key => ls.get(key),
-  //       setItem: (key, value) => ls.set(key, value),
-  //       removeItem: key => ls.remove(key)
-  //     }
-  //   })
-  // ]
-  // plugins: [
-  //   createPersistedState({
-  //     key: "s",
-  //     storage: {
-  //       getItem: key => Cookies.get(key),
-  //       setItem: (key, value) => Cookies.set(key, value, { expires: in1day }),
-  //       removeItem: key => Cookies.remove(key)
-  //     }
-  //   })
-  // ]
 });

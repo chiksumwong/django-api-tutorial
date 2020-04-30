@@ -1,13 +1,13 @@
 // import SystemLogCreate from "@/views/client/system_log/Create";
 // import SystemLogUpdate from "@/views/client/system_log/Update";
 // import SystemLog from "@/views/client/system_log/SystemLog";
-import SystemLogs from "@/views/dashboard/system_log/SystemLogs";
+import AccessLog from "@/views/dashboard/system_log/AccessLog";
 
 export default [
   {
-    path: "system_logs",
-    name: "system_logs",
-    component: SystemLogs
+    path: "access_log",
+    name: "access_log",
+    component: AccessLog
   }
   //   ,
   //   {

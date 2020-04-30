@@ -2,6 +2,8 @@ import uuid
 
 from django.db import models
 
+from django_project import settings
+
 
 class Mayor(models.Model):
     mayor_id = models.UUIDField(primary_key=True, auto_created=True, default=uuid.uuid4, editable=False)
@@ -38,6 +40,7 @@ class Customer(models.Model):
     customer_status = models.SmallIntegerField(choices=customer_status, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     city = models.ForeignKey('City', on_delete=models.CASCADE)  # FK of 'City', if is other app 'app.City'
+    owner = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # One to One
 
     class Meta:
         db_table = 'a_customer'
@@ -50,6 +53,7 @@ class Product(models.Model):
     product_id = models.UUIDField(primary_key=True, auto_created=True, default=uuid.uuid4, editable=False)
     product_name = models.CharField(max_length=100)
     price = models.FloatField()
+    product_image = models.ImageField(upload_to='product_image')
     created_at = models.DateTimeField(auto_now_add=True)
     customers = models.ManyToManyField(Customer, through='Order', through_fields=('product', 'customer'))
     # Many to Many through "Order"
@@ -73,3 +77,16 @@ class Order(models.Model):
 
     def __str__(self):
         return self.order_id
+
+
+class OrderAttachment(models.Model):
+    order_attachment_id = models.UUIDField(primary_key=True, auto_created=True, default=uuid.uuid4, editable=False)
+    order = models.ForeignKey('Order', on_delete=models.CASCADE)
+    attachment = models.FileField(upload_to='order')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "order_attachment"
+
+    def __str__(self):
+        return self.order
