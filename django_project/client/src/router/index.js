@@ -1,29 +1,30 @@
 import Vue from "vue";
 // import { store } from "@/store";
 import VueRouter from "vue-router";
-import ClientLayout from "@/views/app/ClientLayout";
-import DashboardLayout from "@/views/app/DashboardLayout";
-import ClientHome from "@/views/client/product/Products";
-import DashboardHome from "@/views/dashboard/Home";
-import Files from "@/views/client/Files";
-import ProductRoutes from "./client/product";
-import ApplicationRoutes from "./client/application";
-import SystemLogRoutes from "./dashboard/system_log";
-
-import Register from "@/views/client/user/Register";
-import Login from "@/views/client/user/Login";
-
 Vue.use(VueRouter);
+
+// Layout
+import WebsiteLayout from "@/views/App/WebsiteLayout";
+import AdminPanelLayout from "@/views/App/AdminPanelLayout";
+// Routes
+import ProductRoutes from "./site/product";
+import SystemLogRoutes from "./admin/system-log";
+// Pages - Home
+import WebsiteHome from "@/views/Website/Product/Products";
+import AdminPanelHome from "@/views/AdminPanel/Dashboard";
+// Pages
+import Register from "@/views/Website/User/Register";
+import Login from "@/views/Website/User/Login";
 
 const routes = [
   {
     path: "/",
-    component: ClientLayout,
+    component: WebsiteLayout,
     children: [
       {
         path: "",
-        name: "client_home",
-        component: ClientHome
+        name: "site_home",
+        component: WebsiteHome
       },
       {
         path: "register",
@@ -35,25 +36,19 @@ const routes = [
         name: "login",
         component: Login
       },
-      {
-        path: "files",
-        name: "files",
-        component: Files
-      },
-      ...ProductRoutes,
-      ...ApplicationRoutes,
-      ...SystemLogRoutes
+      ...ProductRoutes
     ]
   },
   {
     path: "/dashboard",
-    component: DashboardLayout,
+    component: AdminPanelLayout,
     children: [
       {
         path: "",
-        name: "dashboard_home",
-        component: DashboardHome
-      }
+        name: "admin_home",
+        component: AdminPanelHome
+      },
+      ...SystemLogRoutes
     ]
   },
   {

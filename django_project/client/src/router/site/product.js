@@ -1,7 +1,7 @@
-import ProductCreate from "@/views/client/product/Create";
-import ProductUpdate from "@/views/client/product/Update";
-import Product from "@/views/client/product/Product";
-import Products from "@/views/client/product/Products";
+import ProductCreate from "@/views/Website/Product/Create";
+import ProductUpdate from "@/views/Website/Product/Update";
+import Product from "@/views/Website/Product/Product";
+import Products from "@/views/Website/Product/Products";
 
 export default [
   {

@@ -1,5 +1,5 @@
 import { router } from "@/router";
-import UserAPI from "@/api/user";
+import UserAPI from "@/api/site/user";
 const jwtDecode = require("jwt-decode");
 
 export default {

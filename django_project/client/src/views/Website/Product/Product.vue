@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import ProductAPI from "@/api/product";
+import ProductAPI from "@/api/site/product";
 export default {
   data() {
     return {

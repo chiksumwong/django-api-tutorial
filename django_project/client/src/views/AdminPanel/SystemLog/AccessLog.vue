@@ -58,8 +58,7 @@
 
 <script>
 import XLSX from "xlsx";
-import RegistrationAPI from "@/api/registration";
-import Formatter from "@/helper/formatters";
+import Formatter from "@/helper/formatter";
 
 export default {
   data() {
@@ -108,22 +107,6 @@ export default {
       });
       return data;
     },
-    async toSyncPush() {
-      this.toggleBusy();
-      await RegistrationAPI.pushRegistration();
-      this.loadRegistration();
-      this.toggleBusy();
-    },
-    async toSyncPull() {
-      this.toggleBusy();
-      await RegistrationAPI.pullRegistration();
-      this.loadRegistration();
-      this.toggleBusy();
-    },
-    sync() {
-      this.toSyncPush();
-      this.toSyncPull();
-    },
     exportExcel() {
       const ws = XLSX.utils.aoa_to_sheet(this.tableFormatter(this.items));
       const wb = XLSX.utils.book_new();
@@ -133,13 +116,8 @@ export default {
     toggleBusy() {
       this.isBusy = !this.isBusy;
     },
-    async loadRegistration() {
-      const res = await RegistrationAPI.listRegistration();
-      if (res.data) {
-        this.items = res.data;
-      } else {
-        console.log("Fail", res.err);
-      }
+    loadAccessLog() {
+      return false;
     }
   },
   mounted() {

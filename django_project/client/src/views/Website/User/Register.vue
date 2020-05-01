@@ -136,7 +136,7 @@
 </template>
 
 <script>
-import UserAPI from "@/api/user";
+import UserAPI from "@/api/site/user";
 
 import {
   required,

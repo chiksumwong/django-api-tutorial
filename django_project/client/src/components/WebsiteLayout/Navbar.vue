@@ -3,12 +3,12 @@
     <div class="container">
       <b-navbar toggleable="md" class="pl-0 ">
         <!-- Icon -->
-        <!-- <div v-show="isAdmin">
+        <div v-show="isAdmin">
           <b-navbar-brand
             class="d-none d-md-block d-lg-block d-xl-block"
             @click="route_to('/dashboard')"
           >
-            Django API Tutorila
+            Shop
           </b-navbar-brand>
         </div>
         <div v-show="!isAdmin">
@@ -16,12 +16,12 @@
             class="d-none d-md-block d-lg-block d-xl-block"
             @click="route_to('/')"
           >
-             Django API Tutorila
+            Shop
           </b-navbar-brand>
-        </div> -->
+        </div>
         <!-- Icon - Mobile -->
         <div class="d-sm-block d-md-none">
-          <h1 class="name">Django API Tutorila</h1>
+          <h1 class="name">Shop</h1>
         </div>
 
         <!-- Toggle -->

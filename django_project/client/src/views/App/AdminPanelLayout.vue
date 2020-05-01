@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import Navbar from "@/components/dashboard_layout/Navbar";
-import Footer from "@/components/dashboard_layout/Footer";
-import Sidebar from "@/components/dashboard_layout/Sidebar";
+import Navbar from "@/components/AdminPanelLayout/Navbar";
+import Footer from "@/components/AdminPanelLayout/Footer";
+import Sidebar from "@/components/AdminPanelLayout/Sidebar";
 
 export default {
   components: {
