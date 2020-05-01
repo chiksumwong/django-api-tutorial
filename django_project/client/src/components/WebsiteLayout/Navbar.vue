@@ -73,7 +73,7 @@
           <!-- System Name -->
           <div class="col-sm-12 d-none d-md-block d-lg-block d-xl-block">
             <div class="row justify-content-end">
-              <h1 class="name">Django API Tutorila</h1>
+              <h1 class="name">eShop</h1>
             </div>
           </div>
           <!-- Links -->
@@ -87,15 +87,6 @@
                   </div>
                 </router-link>
               </b-nav-item>
-              <!-- Create Application -->
-              <!-- <b-nav-item v-show="!isLogin">
-                <router-link to="/application/create">
-                  <div class="nav-item">
-                    Create Application
-                  </div>
-                </router-link>
-              </b-nav-item> -->
-              <!-- Login -->
               <b-nav-item v-show="!isLogin">
                 <router-link to="/login">
                   <div class="nav-item">
@@ -103,27 +94,18 @@
                   </div>
                 </router-link>
               </b-nav-item>
-              <!-- Registration -->
+              <!-- Register -->
               <b-nav-item v-show="!isLogin">
                 <router-link to="/register">
                   <div class="nav-item">
-                    Registration
+                    Register
                   </div>
                 </router-link>
               </b-nav-item>
               <!-- Drapdown - Admin -->
-              <b-nav-item-dropdown text="Admin" right>
-                <b-dropdown-item @click="route_to('/system_logs')"
-                  >System Log</b-dropdown-item
-                >
-                <b-dropdown-item @click="route_to('/applications')"
-                  >Application</b-dropdown-item
-                >
-                <b-dropdown-item @click="route_to('/product/create')"
-                  >Create Products</b-dropdown-item
-                >
-                <b-dropdown-item @click="route_to('/files')"
-                  >Files</b-dropdown-item
+              <b-nav-item-dropdown text="User" right>
+                <b-dropdown-item @click="route_to('/admin')"
+                  >Admin Panel</b-dropdown-item
                 >
               </b-nav-item-dropdown>
               <!-- End - Drapdown - Admin -->

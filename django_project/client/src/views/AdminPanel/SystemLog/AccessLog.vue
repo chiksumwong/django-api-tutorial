@@ -1,21 +1,14 @@
 <template>
-  <b-container>
+  <div class="mx-3">
     <!-- Title -->
     <div class="row p-3">
-      <div class="page">Registration Management</div>
+      <div class="page">Access Log</div>
     </div>
     <div>
-      <!-- <b-button squared class="px-5 mb-2" @click="toSyncPush()"
-        >Push Sync (API Test)</b-button
-      >
-      <b-button squared class="px-5 mb-2 ml-1" @click="toSyncPull()"
-        >Pull Sync (API Test)</b-button
-      > -->
-      <b-button squared class="px-5 mb-2 ml-1" @click="sync()">Sync</b-button>
       <b-button
         variant="success"
         squared
-        class="px-5 mb-2 ml-2"
+        class="px-5 mb-2"
         @click="exportExcel()"
         >Export</b-button
       >
@@ -53,7 +46,7 @@
     </div>
     <hr class="mt-0" />
     {{ check_list }}
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -121,7 +114,7 @@ export default {
     }
   },
   mounted() {
-    this.loadRegistration();
+    this.loadAccessLog();
   }
 };
 </script>

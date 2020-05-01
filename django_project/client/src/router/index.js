@@ -11,10 +11,12 @@ import ProductRoutes from "./site/product";
 import SystemLogRoutes from "./admin/system-log";
 // Pages - Home
 import WebsiteHome from "@/views/Website/Product/Products";
-import AdminPanelHome from "@/views/AdminPanel/Dashboard";
-// Pages
+import AdminPanelHome from "@/views/AdminPanel/Dashboard/Dashboard";
+// Pages - Website
 import Register from "@/views/Website/User/Register";
 import Login from "@/views/Website/User/Login";
+// Pages - Admin Panel
+import Dashboard from "@/views/AdminPanel/Dashboard/Dashboard";
 
 const routes = [
   {
@@ -28,7 +30,7 @@ const routes = [
       },
       {
         path: "register",
-        name: "registration",
+        name: "register",
         component: Register
       },
       {
@@ -40,13 +42,18 @@ const routes = [
     ]
   },
   {
-    path: "/dashboard",
+    path: "/admin",
     component: AdminPanelLayout,
     children: [
       {
         path: "",
         name: "admin_home",
         component: AdminPanelHome
+      },
+      {
+        path: "dashboard",
+        name: "dashboard",
+        component: Dashboard
       },
       ...SystemLogRoutes
     ]
