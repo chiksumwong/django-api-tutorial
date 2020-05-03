@@ -1,137 +1,146 @@
 <template>
   <b-container>
-    <h1>Registraion</h1>
-
-    <!-- Form 1 -->
-    <div class="form-title">Account Information</div>
-    <b-form @submit.prevent="handleSubmit">
-      <!-- username -->
-      <b-row class="mt-1">
-        <b-col sm="3">
-          <label class="form-label">
-            User Name
-            <em>*</em>
-          </label>
-        </b-col>
-        <b-col sm="9">
-          <b-form-input
-            size="sm"
-            v-model="form.username"
-            :class="{ 'is-invalid': submitted && $v.form.username.$error }"
-          ></b-form-input>
-          <div
-            v-if="submitted && $v.form.username.$error"
-            class="invalid-feedback"
-          >
-            <span v-if="!$v.form.username.required">User name is required</span>
-          </div>
-        </b-col>
-      </b-row>
-      <!-- email -->
-      <b-row class="mt-1">
-        <b-col sm="3">
-          <label class="form-label">
-            Email
-            <em>*</em>
-          </label>
-        </b-col>
-        <b-col sm="9">
-          <b-form-input
-            size="sm"
-            v-model="form.email"
-            :class="{ 'is-invalid': submitted && $v.form.email.$error }"
-          ></b-form-input>
-          <div
-            v-if="submitted && $v.form.email.$error"
-            class="invalid-feedback"
-          >
-            <span v-if="!$v.form.email.required">Email is required</span>
-            <span v-if="!$v.form.email.email">Email is invalid</span>
-          </div>
-        </b-col>
-      </b-row>
-      <!-- password -->
-      <b-row class="mt-1">
-        <b-col sm="3">
-          <label class="form-label">
-            Password
-            <em>*</em>
-          </label>
-        </b-col>
-        <b-col sm="9">
-          <b-form-input
-            size="sm"
-            v-model="form.password"
-            type="password"
-            aria-describedby="password-help-block"
-            :class="{ 'is-invalid': submitted && $v.form.password.$error }"
-          ></b-form-input>
-          <div
-            v-if="submitted && $v.form.password.$error"
-            class="invalid-feedback"
-          >
-            <span v-if="!$v.form.password.required">Password is required</span>
-            <span v-if="!$v.form.password.minLength"
-              >Password must be at least 8 characters</span
+    <div class="mx-auto col-sm-6 mt-5">
+      <div class="form-title ">Registraion</div>
+      <b-form
+        style="border-style: solid;border-color: #343a40;"
+        class="p-3"
+        @submit.prevent="handleSubmit"
+      >
+        <!-- username -->
+        <b-row class="mt-1">
+          <b-col sm="3">
+            <label class="form-label">
+              User Name
+              <em>*</em>
+            </label>
+          </b-col>
+          <b-col sm="9">
+            <b-form-input
+              size="sm"
+              v-model="form.username"
+              :class="{ 'is-invalid': submitted && $v.form.username.$error }"
+            ></b-form-input>
+            <div
+              v-if="submitted && $v.form.username.$error"
+              class="invalid-feedback"
             >
-            <span v-if="!$v.form.password.lowercase">
-              <br />Password must be at least 1 lowercase alphabetical character
-            </span>
-            <span v-if="!$v.form.password.upercase">
-              <br />Password must be at least 1 uppercase alphabetical character
-            </span>
-            <span v-if="!$v.form.password.numeric">
-              <br />Password must be at least 1 numeric character
-            </span>
-            <span v-if="!$v.form.password.character">
-              <br />Password must be at least 1 special character
-            </span>
-          </div>
-        </b-col>
-      </b-row>
-      <!-- confirm password -->
-      <b-row class="mt-1">
-        <b-col sm="3">
-          <label class="form-label">
-            Confirm Password
-            <em>*</em>
-          </label>
-        </b-col>
-        <b-col sm="9">
-          <b-form-input
+              <span v-if="!$v.form.username.required"
+                >User name is required</span
+              >
+            </div>
+          </b-col>
+        </b-row>
+        <!-- email -->
+        <b-row class="mt-1">
+          <b-col sm="3">
+            <label class="form-label">
+              Email
+              <em>*</em>
+            </label>
+          </b-col>
+          <b-col sm="9">
+            <b-form-input
+              size="sm"
+              v-model="form.email"
+              :class="{ 'is-invalid': submitted && $v.form.email.$error }"
+            ></b-form-input>
+            <div
+              v-if="submitted && $v.form.email.$error"
+              class="invalid-feedback"
+            >
+              <span v-if="!$v.form.email.required">Email is required</span>
+              <span v-if="!$v.form.email.email">Email is invalid</span>
+            </div>
+          </b-col>
+        </b-row>
+        <!-- password -->
+        <b-row class="mt-1">
+          <b-col sm="3">
+            <label class="form-label">
+              Password
+              <em>*</em>
+            </label>
+          </b-col>
+          <b-col sm="9">
+            <b-form-input
+              size="sm"
+              v-model="form.password"
+              type="password"
+              aria-describedby="password-help-block"
+              :class="{ 'is-invalid': submitted && $v.form.password.$error }"
+            ></b-form-input>
+            <div
+              v-if="submitted && $v.form.password.$error"
+              class="invalid-feedback"
+            >
+              <span v-if="!$v.form.password.required"
+                >Password is required</span
+              >
+              <span v-if="!$v.form.password.minLength"
+                >Password must be at least 8 characters</span
+              >
+              <span v-if="!$v.form.password.lowercase">
+                <br />Password must be at least 1 lowercase alphabetical
+                character
+              </span>
+              <span v-if="!$v.form.password.upercase">
+                <br />Password must be at least 1 uppercase alphabetical
+                character
+              </span>
+              <span v-if="!$v.form.password.numeric">
+                <br />Password must be at least 1 numeric character
+              </span>
+              <span v-if="!$v.form.password.character">
+                <br />Password must be at least 1 special character
+              </span>
+            </div>
+          </b-col>
+        </b-row>
+        <!-- confirm password -->
+        <b-row class="mt-1">
+          <b-col sm="3">
+            <label class="form-label">
+              Confirm Password
+              <em>*</em>
+            </label>
+          </b-col>
+          <b-col sm="9">
+            <b-form-input
+              size="sm"
+              v-model="form.confirmPassword"
+              type="password"
+              aria-describedby="password-help-block"
+              :class="{
+                'is-invalid': submitted && $v.form.confirmPassword.$error
+              }"
+            ></b-form-input>
+            <div
+              v-if="submitted && $v.form.confirmPassword.$error"
+              class="invalid-feedback"
+            >
+              <span v-if="!$v.form.confirmPassword.required"
+                >Confirm Password is required</span
+              >
+              <span v-else-if="!$v.form.confirmPassword.sameAsPassword"
+                >Passwords must match</span
+              >
+            </div>
+          </b-col>
+        </b-row>
+        <!-- button -->
+        <b-row class="justify-content-end">
+          <b-button
+            squared
+            variant="primary"
             size="sm"
-            v-model="form.confirmPassword"
-            type="password"
-            aria-describedby="password-help-block"
-            :class="{
-              'is-invalid': submitted && $v.form.confirmPassword.$error
-            }"
-          ></b-form-input>
-          <div
-            v-if="submitted && $v.form.confirmPassword.$error"
-            class="invalid-feedback"
+            class="my-2 mx-3 button-item"
+            type="submit"
+            >Submit</b-button
           >
-            <span v-if="!$v.form.confirmPassword.required"
-              >Confirm Password is required</span
-            >
-            <span v-else-if="!$v.form.confirmPassword.sameAsPassword"
-              >Passwords must match</span
-            >
-          </div>
-        </b-col>
-      </b-row>
-      <!-- button -->
-      <b-row class="justify-content-end">
-        <b-button
-          squared
-          variant="primary"
-          size="sm"
-          class="my-2 mx-3 button-item"
-          type="submit"
-          >Submit</b-button
-        >
-      </b-row>
-    </b-form>
+        </b-row>
+      </b-form>
+    </div>
   </b-container>
 </template>
 
@@ -275,16 +284,12 @@ export default {
   position: absolute;
   z-index: -1;
 }
-.button-item {
-  background-color: #036ab5;
-}
 .form-title {
-  border-spacing: 3px;
-  font-size: 0.9em;
-  background: #016ab3;
-  color: #fff;
+  font-size: 1.5em;
+  background: #343a40;
+  color: #f8f9fa;
   font-weight: bold;
-  height: 23px;
+  height: 40px;
   padding-left: 10px;
 }
 .form-label {
@@ -294,8 +299,11 @@ export default {
   vertical-align: top;
   font-size: 0.9em;
   margin: 0px;
-  color: #047dbc;
+  color: #343a40;
   padding: 4px 3px;
   font-weight: bold;
+}
+.button-item {
+  background-color: #343a40;
 }
 </style>

@@ -1,119 +1,82 @@
 <template>
-  <header>
-    <div class="container">
-      <b-navbar toggleable="md" class="pl-0 ">
-        <!-- Icon -->
-        <div v-show="isAdmin">
-          <b-navbar-brand
-            class="d-none d-md-block d-lg-block d-xl-block"
-            @click="route_to('/dashboard')"
+  <header class="px-0">
+    <!-- Size and Language -->
+    <div class="d-none d-md-block d-lg-block d-xl-block container">
+      <div class="row justify-content-end">
+        <div id="font-size">
+          <div
+            id="fs-s"
+            @click="font('s')"
+            :class="[fs_s ? 'font-size-active' : '']"
           >
-            Shop
-          </b-navbar-brand>
-        </div>
-        <div v-show="!isAdmin">
-          <b-navbar-brand
-            class="d-none d-md-block d-lg-block d-xl-block"
-            @click="route_to('/')"
+            A
+          </div>
+          <div
+            id="fs-m"
+            @click="font('m')"
+            :class="[fs_m ? 'font-size-active' : '']"
           >
-            Shop
-          </b-navbar-brand>
+            A
+          </div>
+          <div
+            id="fs-l"
+            @click="font('l')"
+            :class="[fs_l ? 'font-size-active' : '']"
+          >
+            A
+          </div>
         </div>
-        <!-- Icon - Mobile -->
-        <div class="d-sm-block d-md-none">
-          <h1 class="name">Shop</h1>
+        <div id="language" class="row">
+          <div id="lang-en" v-show="l_en" @click="lang('en')">
+            English
+          </div>
+          <div v-show="l_s1">|</div>
+          <div id="lang-tw" v-show="l_tw" @click="lang('tw')">
+            繁體
+          </div>
+          <div v-show="l_s2">|</div>
+          <div id="lang-cn" v-show="l_cn" @click="lang('cn')">
+            简体
+          </div>
         </div>
+      </div>
+    </div>
+    <b-navbar toggleable="md" type="dark" variant="dark">
+      <b-container>
+        <b-navbar-brand href="/">eShop</b-navbar-brand>
 
-        <!-- Toggle -->
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-        <!-- Left Side -->
-        <div class="row ml-auto w-100">
-          <!-- Size and Language -->
-          <div class="col-sm-12 d-none d-md-block d-lg-block d-xl-block">
-            <div class="row justify-content-end">
-              <div id="font-size">
-                <div
-                  id="fs-s"
-                  @click="font('s')"
-                  :class="[fs_s ? 'font-size-active' : '']"
-                >
-                  A
-                </div>
-                <div
-                  id="fs-m"
-                  @click="font('m')"
-                  :class="[fs_m ? 'font-size-active' : '']"
-                >
-                  A
-                </div>
-                <div
-                  id="fs-l"
-                  @click="font('l')"
-                  :class="[fs_l ? 'font-size-active' : '']"
-                >
-                  A
-                </div>
-              </div>
-              <div id="language" class="row">
-                <div id="lang-en" v-show="l_en" @click="lang('en')">
-                  English
-                </div>
-                <div v-show="l_s1">|</div>
-                <div id="lang-tw" v-show="l_tw" @click="lang('tw')">
-                  繁體
-                </div>
-                <div v-show="l_s2">|</div>
-                <div id="lang-cn" v-show="l_cn" @click="lang('cn')">
-                  简体
-                </div>
-              </div>
+        <b-collapse id="nav-collapse" is-nav>
+          <!-- Right aligned nav items -->
+          <b-navbar-nav class="ml-auto">
+            <div class="mx-1 py-1" v-show="!isLogin">
+              <b-button
+                size="sm"
+                class="mr-1"
+                variant="success"
+                @click="route_to('/login')"
+                >Login</b-button
+              >
+              <b-button size="sm" variant="info" @click="route_to('/register')"
+                >Register</b-button
+              >
             </div>
-          </div>
-          <!-- System Name -->
-          <div class="col-sm-12 d-none d-md-block d-lg-block d-xl-block">
-            <div class="row justify-content-end">
-              <h1 class="name">eShop</h1>
-            </div>
-          </div>
-          <!-- Links -->
-          <b-collapse id="nav-collapse" is-nav>
-            <b-navbar-nav class="ml-auto">
-              <!-- Product -->
-              <b-nav-item v-show="!isLogin">
-                <router-link to="/products">
-                  <div class="nav-item">
-                    Products
-                  </div>
-                </router-link>
-              </b-nav-item>
-              <b-nav-item v-show="!isLogin">
-                <router-link to="/login">
-                  <div class="nav-item">
-                    Login
-                  </div>
-                </router-link>
-              </b-nav-item>
-              <!-- Register -->
-              <b-nav-item v-show="!isLogin">
-                <router-link to="/register">
-                  <div class="nav-item">
-                    Register
-                  </div>
-                </router-link>
-              </b-nav-item>
-              <!-- Drapdown - Admin -->
-              <b-nav-item-dropdown text="User" right>
-                <b-dropdown-item @click="route_to('/admin')"
-                  >Admin Panel</b-dropdown-item
-                >
-              </b-nav-item-dropdown>
-              <!-- End - Drapdown - Admin -->
-            </b-navbar-nav>
-          </b-collapse>
-        </div>
-      </b-navbar>
-    </div>
+
+            <b-nav-item-dropdown right v-show="isLogin">
+              <template v-slot:button-content>
+                <em>User</em>
+              </template>
+              <b-dropdown-item href="#">Profile</b-dropdown-item>
+              <b-dropdown-item v-show="isAdmin" @click="route_to('/admin')"
+                >Admin Panel</b-dropdown-item
+              >
+              <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+            </b-nav-item-dropdown>
+          </b-navbar-nav>
+        </b-collapse>
+      </b-container>
+    </b-navbar>
   </header>
 </template>
 
@@ -138,11 +101,11 @@ export default {
   computed: {
     isLogin() {
       // return this.$store.state.user.status.isLogin;
-      return false;
+      return true;
     },
     isAdmin() {
       // return this.$store.state.user.isAdmin;
-      return false;
+      return true;
     },
     fs_s() {
       return this.$store.state.system.fs_s;

@@ -1,27 +1,56 @@
 <template>
   <div>
-    <div class="btn-active py-3">
-      <h3 class="ml-2">
-        Admin Panel
-      </h3>
+    <div class="d-none d-md-block d-lg-block d-xl-block">
+      <div class="btn-active py-3">
+        <h3 class="ml-2">
+          Admin Panel
+        </h3>
+      </div>
+      <div id="btn1" @click="goDashboard()">
+        Dashboard
+      </div>
+      <div
+        id="btn2"
+        :class="[btn2_isActive ? 'btn-active' : '']"
+        @click="goAccessLog()"
+        v-show="!isAdmin"
+      >
+        Access Log
+      </div>
+      <div
+        id="btn3"
+        :class="[btn3_isActive ? 'btn-active' : '']"
+        @click="goResetPassword()"
+      >
+        Reset Password
+      </div>
     </div>
-    <div id="btn1" @click="goDashboard()">
-      Dashboard
-    </div>
-    <div
-      id="btn2"
-      :class="[btn2_isActive ? 'btn-active' : '']"
-      @click="goAccessLog()"
-      v-show="!isAdmin"
-    >
-      Access Log
-    </div>
-    <div
-      id="btn3"
-      :class="[btn3_isActive ? 'btn-active' : '']"
-      @click="goResetPassword()"
-    >
-      Reset Password
+
+    <!-- Mobile -->
+    <div class="d-sm-block d-md-none">
+      <div class="bg-info py-1 px-1">
+        <b-button v-b-toggle.sidebar-1>Toggle Sidebar</b-button>
+      </div>
+      <b-sidebar id="sidebar-1" title="Admin Panel" shadow>
+        <div id="btn1" @click="goDashboard()">
+          Dashboard
+        </div>
+        <div
+          id="btn2"
+          :class="[btn2_isActive ? 'btn-active' : '']"
+          @click="goAccessLog()"
+          v-show="!isAdmin"
+        >
+          Access Log
+        </div>
+        <div
+          id="btn3"
+          :class="[btn3_isActive ? 'btn-active' : '']"
+          @click="goWebsite()"
+        >
+          Website
+        </div>
+      </b-sidebar>
     </div>
   </div>
 </template>
@@ -54,11 +83,11 @@ export default {
       this.btn2_isActive = true;
       this.$router.push("/admin/access_log");
     },
-    goResetPassword() {
+    goWebsite() {
       this.btn1_isActive = false;
       this.btn2_isActive = false;
       this.btn3_isActive = true;
-      this.$router.push("/admin/dashboard");
+      this.$router.push("/");
     }
   },
   computed: {

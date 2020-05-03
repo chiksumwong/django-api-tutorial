@@ -3,7 +3,7 @@
     <div class="mx-auto col-sm-6 mt-5">
       <div class="form-title">Login</div>
       <b-form
-        style="border-style: solid;border-color: #036ab5;"
+        style="border-style: solid;border-color: #343a40;"
         class="p-3"
         @submit.prevent="handleSubmit"
       >
@@ -64,8 +64,8 @@
             >Login</b-button
           >
         </b-row>
-        <router-link to="/register"> Register </router-link><br />
-        <router-link to="/forgot_password">Forgot Password</router-link>
+        <!-- <router-link to="/register"> Register </router-link><br />
+        <router-link to="/forgot_password">Forgot Password</router-link> -->
       </b-form>
     </div>
   </b-container>
@@ -119,8 +119,8 @@ export default {
 <style scoped>
 .form-title {
   font-size: 1.5em;
-  background: #016ab3;
-  color: #fff;
+  background: #343a40;
+  color: #f8f9fa;
   font-weight: bold;
   height: 40px;
   padding-left: 10px;
@@ -132,11 +132,11 @@ export default {
   vertical-align: top;
   font-size: 0.9em;
   margin: 0px;
-  color: #047dbc;
+  color: #343a40;
   padding: 4px 3px;
   font-weight: bold;
 }
 .button-item {
-  background-color: #036ab5;
+  background-color: #343a40;
 }
 </style>
