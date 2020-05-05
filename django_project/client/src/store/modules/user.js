@@ -1,62 +1,67 @@
-// import UserAPI from "@/api/user";
 import { router } from "@/router";
+import UserAPI from "@/api/site/user";
+const jwtDecode = require("jwt-decode");
 
 export default {
   namespaced: true,
   state: {
     n: null, //user name
     i: null, //id
-    t: null, //token
     l: false, // is login
-    a: false // is admin
+    a: false, // is admin
+    t: null
   },
   actions: {
     async login({ commit }, payload) {
       try {
-        console.log("payload", payload);
-        // user login via user login api, get all data
-        // const res = await UserAPI.login(payload);
-        // console.log("login success", res.data);
-        let fake_data = {
-          user_name: "fake name", //user name
-          user_id: null, //id
-          token: "XVMaXISzosN89QxaOpfeq9LtITpMAi", //token
-          isAdmin: false // is admin
-        };
-        commit("loginSuccess", fake_data);
-        // router.push("/");
+        // Decoded
+        var decoded = jwtDecode(payload.token);
+        // Get User Info
+        const res = await UserAPI.login({ user_id: decoded.user_id });
+        if (res.data) {
+          const user = {};
+          user.id = decoded.user_id;
+          user.name = res.data.username;
+          user.isAdmin = res.data.is_staff;
+          user.token = payload.token;
+          // Commit State
+          commit("loginSuccess", user);
+          // Redirect
+          router.push("/");
+        }
       } catch (e) {
-        console.log(e);
         commit("loginFailure");
-        router.push("/login");
       }
     },
-    logout({ commit }) {
+    async logout({ commit }, payload) {
+      await UserAPI.logout(payload);
       commit("logout");
       router.push("/");
+    },
+    logoutAction({ commit }) {
+      commit("logout");
     }
   },
   mutations: {
     loginSuccess(state, user) {
-      state.u = user.user_name;
-      state.i = user.user_id;
-      state.t = user.token;
+      state.n = user.name;
+      state.i = user.id;
       state.l = true;
       state.a = user.isAdmin;
+      state.t = user.token;
     },
     loginFailure(state) {
-      state.u = null;
+      state.n = null;
       state.i = null;
-      state.t = null;
       state.l = false;
       state.a = false;
     },
     logout(state) {
-      state.u = null;
+      state.n = null;
       state.i = null;
-      state.t = null;
       state.l = false;
       state.a = false;
+      state.t = null;
     }
   }
 };

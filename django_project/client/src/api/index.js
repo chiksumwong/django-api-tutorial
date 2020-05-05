@@ -3,9 +3,7 @@ import { store } from "@/store";
 import axios from "axios";
 
 const instance = axios.create({
-  // baseURL: (process.env.VUE_APP_BASE_URL !== undefined) ? process.env.VUE_APP_BASE_URL : 'http://localhost:3000/api/v1/'
-  // baseURL: process.env.VUE_APP_BASE_API,
-  baseURL: "http://127.0.0.1:8000/api/",
+  baseURL: process.env.VUE_APP_BASE_API,
   headers: {
     "Content-Type": "application/json"
   }
@@ -21,7 +19,22 @@ instance.interceptors.request.use(
     return config;
   },
   error => {
+    // return error;
     return Promise.reject(error);
+  }
+);
+
+instance.interceptors.response.use(
+  response => {
+    return response;
+  },
+  error => {
+    //handle 401
+    if (error.response && error.response.status === 401) {
+      store.dispatch("user/logoutAction");
+    }
+    return error;
+    // return Promise.reject(error);
   }
 );
 
