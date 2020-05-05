@@ -1,8 +1,7 @@
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser
-from rest_framework.viewsets import GenericViewSet
 
-from a_shop.permissions import IsPublicIsCreation, IsPublicIsList
+from a_shop.permissions import IsPublicList
 from a_shop.serializers import *
 
 
@@ -27,7 +26,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [IsPublicIsList]
+    permission_classes = [IsPublicList]
 
 
 class OrderViewSet(viewsets.ModelViewSet):
@@ -35,12 +34,3 @@ class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     permission_classes = [IsAdminUser]
 
-
-# Disable "Update" and "Delete" Method
-class ApplicationViewSet(mixins.CreateModelMixin,
-                         mixins.RetrieveModelMixin,
-                         mixins.ListModelMixin,
-                         GenericViewSet):
-    queryset = Application.objects.all()
-    serializer_class = ApplicationSerializer
-    permission_classes = [IsPublicIsCreation]

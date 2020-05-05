@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'oauth2_provider',  # oAuth
     # Function
     'f_auth',
+    'f_oauth',
+    'f_calendar',
     'f_schedule_job',
     'f_system_log',
     # Application
@@ -137,11 +139,12 @@ OAUTH2_PROVIDER = {
 # oAuth
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # oAuth
         'rest_framework_simplejwt.authentication.JWTAuthentication',  # JWT
+        # 'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # oAuth
+
     ],
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated'  # oAuth
+        # 'rest_framework.permissions.IsAuthenticated',  # oAuth
     )
 }
 
