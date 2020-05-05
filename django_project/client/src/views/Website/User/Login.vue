@@ -57,16 +57,20 @@
         <b-row class="justify-content-end">
           <b-button
             squared
-            variant="primary"
             size="sm"
             class="my-2 mx-3 button-item"
-            type="submit"
+            @click="handleSubmit()"
             >Login</b-button
           >
         </b-row>
         <!-- <router-link to="/register"> Register </router-link><br />
         <router-link to="/forgot_password">Forgot Password</router-link> -->
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+        <!-- Google Sign-in -->
+        <div id="google-signin-button"></div>
+        <b-button squared size="sm" class="button-item" @click="signOut()"
+          >Google Sign Out</b-button
+        >
       </b-form>
     </div>
   </b-container>
@@ -94,13 +98,21 @@ export default {
       }
     }
   },
+  mounted() {
+    window.gapi.signin2.render("google-signin-button", {
+      onsuccess: this.onSignIn
+    });
+  },
   methods: {
-    onSignIn(googleUser) {
-      var profile = googleUser.getBasicProfile();
-      console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
-      console.log("Name: " + profile.getName());
-      console.log("Image URL: " + profile.getImageUrl());
-      console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+    onSignIn(user) {
+      const profile = user.getBasicProfile();
+      console.log("profile: ", profile);
+    },
+    signOut() {
+      var auth2 = window.gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function() {
+        console.log("User signed out.");
+      });
     },
     handleSubmit() {
       this.submitted = true;

@@ -2,6 +2,14 @@ const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
+  chainWebpack: config => {
+    config.plugin("html").tap(args => {
+      args[0].meta = {
+        "google-signin-client_id": process.env.GOOGLE_CLIENT_ID
+      };
+      return args;
+    });
+  },
   // devServer: {
   //   host: "127.0.0.1",
   //   port: 4000,
