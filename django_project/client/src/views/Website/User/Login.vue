@@ -71,6 +71,10 @@
         <b-button squared size="sm" class="button-item" @click="signOut()"
           >Google Sign Out</b-button
         >
+        <!-- Facebook Sign-in -->
+        <b-button @click="logInWithFacebook()">Login with Facebook</b-button>
+        <b-button @click="logoutWithFacebook()">Logout with Facebook</b-button>
+        <b-button @click="getFacebookProfile()">getFacebookProfile</b-button>
       </b-form>
     </div>
   </b-container>
@@ -98,22 +102,7 @@ export default {
       }
     }
   },
-  mounted() {
-    window.gapi.signin2.render("google-signin-button", {
-      onsuccess: this.onSignIn
-    });
-  },
   methods: {
-    onSignIn(user) {
-      const profile = user.getBasicProfile();
-      console.log("profile: ", profile);
-    },
-    signOut() {
-      var auth2 = window.gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function() {
-        console.log("User signed out.");
-      });
-    },
     handleSubmit() {
       this.submitted = true;
 
@@ -131,6 +120,93 @@ export default {
           password
         });
       }
+    },
+    // Google
+    onSuccess(googleUser) {
+      const profile = googleUser.getBasicProfile();
+      console.log("profile: ", profile);
+    },
+    onFailure(error) {
+      console.log(error);
+    },
+    signOut() {
+      var auth2 = window.gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function() {
+        console.log("User signed out.");
+      });
+    },
+    // Facebook
+    logInWithFacebook() {
+      const vm = this;
+      window.FB.getLoginStatus(function(response) {
+        if (response.status === "connected") {
+          vm.getFacebookProfile();
+        } else {
+          window.FB.login(
+            function(response) {
+              if (response.authResponse) {
+                vm.getFacebookProfile();
+              } else {
+                alert("User cancelled login or did not fully authorize.");
+              }
+            },
+            { scope: "public_profile,email" }
+          );
+        }
+      });
+    },
+    logoutWithFacebook() {
+      window.FB.getLoginStatus(function(response) {
+        // 檢查登入狀態
+        if (response.status === "connected") {
+          window.FB.logout(function(response) {
+            console.log("Logout: ", response);
+          });
+        } else {
+          // do something
+        }
+      });
+    },
+    getFacebookProfile() {
+      window.FB.api("/me", function(res) {
+        console.log(res);
+      });
+    },
+    initFacebook() {
+      window.fbAsyncInit = function() {
+        window.FB.init({
+          appId: process.env.VUE_APP_FACEBOOK_APP_ID,
+          cookie: true,
+          xfbml: true,
+          version: process.env.VUE_APP_FACEBOOK_API_VERSION
+        });
+        window.FB.AppEvents.logPageView();
+      };
+    },
+    loadFacebookSDK(d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }
+  },
+  mounted() {
+    window.gapi.signin2.render("google-signin-button", {
+      scope: "profile email",
+      width: 240,
+      height: 50,
+      longtitle: true,
+      onsuccess: this.onSuccess,
+      onfailure: this.onFailure
+    });
+    if (!window.FB) {
+      this.loadFacebookSDK(document, "script", "facebook-jssdk");
+      this.initFacebook();
     }
   }
 };

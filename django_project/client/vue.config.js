@@ -1,14 +1,21 @@
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const fs = require("fs");
 
 module.exports = {
   chainWebpack: config => {
     config.plugin("html").tap(args => {
       args[0].meta = {
-        "google-signin-client_id": process.env.GOOGLE_CLIENT_ID
+        "google-signin-client_id": process.env.VUE_APP_GOOGLE_CLIENT_ID
       };
       return args;
     });
+  },
+  devServer: {
+    https: {
+      key: fs.readFileSync(`${__dirname}/src/assets/https/localhost-key.pem`),
+      cert: fs.readFileSync(`${__dirname}/src/assets/https/localhost.pem`)
+    }
   },
   // devServer: {
   //   host: "127.0.0.1",

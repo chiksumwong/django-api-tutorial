@@ -7,8 +7,13 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
+from google.oauth2 import id_token
+from google.auth.transport import requests
 
 from django.contrib.auth import get_user_model
+
+from django_project.settings_dev_local import GOOGLE_CLIENT_ID
+
 User = get_user_model()
 
 
@@ -22,25 +27,25 @@ class HelloView(APIView):
 
 class GoogleView(APIView):
     def post(self, request):
-        payload = {'access_token': request.data.get("token")}  # validate the token
-        r = requests.get('https://www.googleapis.com/oauth2/v2/userinfo', params=payload)
-        data = json.loads(r.text)
-
-        if 'error' in data:
-            content = {'message': 'wrong google token / this google token is already expired.'}
-            return Response(content)
-
-        # create user if not exist
+        token = request.data.get("token")  # validate the token
         try:
-            user = User.objects.get(email=data['email'])
-        except User.DoesNotExist:
-            user = User()
-            user.username = data['email']
-            # provider random default password
-            user.password = make_password(BaseUserManager().make_random_password())
-            user.email = data['email']
-            user.save()
+            # Specify the CLIENT_ID of the app that accesses the backend:
+            idinfo = id_token.verify_oauth2_token(token, requests.Request(), GOOGLE_CLIENT_ID)
 
-        token = RefreshToken.for_user(user)  # generate token without username & password
-        response = {'username': user.username, 'access_token': str(token.access_token), 'refresh_token': str(token)}
-        return Response(response)
+            if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+                raise ValueError('Wrong issuer.')
+
+            # ID token is valid. Get the user's Google Account ID from the decoded token.
+            user_id = idinfo['sub']
+            email = idinfo['email']
+
+            # Create User if user is not exist
+
+            # if User exist, do login action
+
+            response = {'user_id': user_id, 'email': email}
+            return Response(response)
+
+        except ValueError:
+            # Invalid token
+            pass

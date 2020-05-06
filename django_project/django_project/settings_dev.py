@@ -38,3 +38,6 @@ STATICFILES_DIRS = [
 # Files - For File and Image Upload
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# Google Client ID
+GOOGLE_CLIENT_ID = ''
