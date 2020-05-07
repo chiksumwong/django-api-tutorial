@@ -101,11 +101,11 @@ export default {
   computed: {
     isLogin() {
       // return this.$store.state.user.status.isLogin;
-      return true;
+      return false;
     },
     isAdmin() {
       // return this.$store.state.user.isAdmin;
-      return true;
+      return false;
     },
     fs_s() {
       return this.$store.state.system.fs_s;

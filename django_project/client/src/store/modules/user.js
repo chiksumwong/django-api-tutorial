@@ -9,7 +9,8 @@ export default {
     i: null, //id
     l: false, // is login
     a: false, // is admin
-    t: null
+    t: null, // access token
+    r: null // refresh token
   },
   actions: {
     async login({ commit }, payload) {
@@ -40,6 +41,9 @@ export default {
     },
     logoutAction({ commit }) {
       commit("logout");
+    },
+    setToken({ commit }, payload) {
+      commit("setToken", payload);
     }
   },
   mutations: {
@@ -49,6 +53,7 @@ export default {
       state.l = true;
       state.a = user.isAdmin;
       state.t = user.token;
+      state.r = user.r_token;
     },
     loginFailure(state) {
       state.n = null;
@@ -62,6 +67,10 @@ export default {
       state.l = false;
       state.a = false;
       state.t = null;
+      state.r = null;
+    },
+    setToken(state, payload) {
+      state.t = payload.access_token;
     }
   }
 };

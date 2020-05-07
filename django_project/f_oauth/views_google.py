@@ -1,51 +1,27 @@
-import json
-
-import requests
-from django.contrib.auth.base_user import BaseUserManager
-from django.contrib.auth.hashers import make_password
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-from google.oauth2 import id_token
-from google.auth.transport import requests
+from rest_framework_simplejwt.views import TokenObtainPairView
 
-from django.contrib.auth import get_user_model
-
-from django_project.settings_dev_local import GOOGLE_CLIENT_ID
-
-User = get_user_model()
+from f_oauth.serializers import SocialLoginSerializer
 
 
-class HelloView(APIView):
-    permission_classes = (IsAuthenticated,)
+def get_tokens_for_user(user):
+    refresh = RefreshToken.for_user(user)
+    return {
+        'refresh': str(refresh),
+        'access': str(refresh.access_token),
+    }
 
-    def get(self, request):
-        content = {'message': 'Hello, World!'}
-        return Response(content)
 
+class GoogleLogin(TokenObtainPairView):
+    permission_classes = (AllowAny, )  # AllowAny for login
+    serializer_class = SocialLoginSerializer
 
-class GoogleView(APIView):
     def post(self, request):
-        token = request.data.get("token")  # validate the token
-        try:
-            # Specify the CLIENT_ID of the app that accesses the backend:
-            idinfo = id_token.verify_oauth2_token(token, requests.Request(), GOOGLE_CLIENT_ID)
-
-            if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-                raise ValueError('Wrong issuer.')
-
-            # ID token is valid. Get the user's Google Account ID from the decoded token.
-            user_id = idinfo['sub']
-            email = idinfo['email']
-
-            # Create User if user is not exist
-
-            # if User exist, do login action
-
-            response = {'user_id': user_id, 'email': email}
-            return Response(response)
-
-        except ValueError:
-            # Invalid token
-            pass
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            user = serializer.save()
+            return Response(get_tokens_for_user(user))
+        else:
+            raise ValueError('Not serializable')

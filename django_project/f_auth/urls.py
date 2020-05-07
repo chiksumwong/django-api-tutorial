@@ -7,7 +7,8 @@ from f_auth import views
 urlpatterns = [
     # Auth
     path('auth/o/', include('oauth2_provider.urls', namespace='oauth2_provider')),  # oAuth
-    path('auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # JWT
+    # JWT
+    path('auth/token/obtain/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # JWT
     path('auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # JWT
     path('auth/token/verify/', TokenVerifyView.as_view(), name='token_verify'),  # JWT
     # View Data

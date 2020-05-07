@@ -146,12 +146,14 @@
 
 <script>
 import { required } from "vuelidate/lib/validators";
+import UserAPI from "@/api/site/user";
 import * as Msal from "msal";
 
 export default {
   data() {
     return {
       myMSALObj: Object,
+      googld_id_token: "",
       form: {
         username: "",
         password: ""
@@ -179,28 +181,57 @@ export default {
         return;
       }
 
+      // start if valid
+      this.getToken();
+    },
+    async getToken() {
       const username = this.form.username;
       const password = this.form.password;
-      if (username && password) {
-        this.$store.dispatch("user/login", {
-          username,
-          password
-        });
+      const res = await UserAPI.getToken({
+        username,
+        password
+      });
+      if (res.data) {
+        this.$store.dispatch("user/login", { token: res.data.access });
+      } else {
+        this.loginFail = true;
+        this.submitted = false;
+        this.form.password = "";
       }
     },
     // Google
-    loginWithGoogle() {
+    async loginWithGoogle() {
+      let vm = this;
       let auth2 = window.gapi.auth2.getAuthInstance();
       auth2.attachClickHandler(
         "googleSignIn",
         {},
         function(googleUser) {
-          console.log(googleUser.getBasicProfile());
+          // Useful data for your client-side scripts:
+          var profile = googleUser.getBasicProfile();
+          console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+          console.log("Full Name: " + profile.getName());
+          console.log("Given Name: " + profile.getGivenName());
+          console.log("Family Name: " + profile.getFamilyName());
+          console.log("Image URL: " + profile.getImageUrl());
+          console.log("Email: " + profile.getEmail());
+          // The ID token you need to pass to your backend:
+          var id_token = googleUser.getAuthResponse().id_token;
+          console.log("ID Token: " + id_token);
+          vm.googld_id_token = id_token;
         },
         function(error) {
           alert(JSON.stringify(error, undefined, 2));
         }
       );
+      const res = await UserAPI.getToken({
+        token: this.googld_id_token
+      });
+      if (res.data) {
+        console.log("Login Success: ", res.data);
+      } else {
+        console.log("Fail");
+      }
     },
     logoutWithGoogle() {
       let auth2 = window.gapi.auth2.getAuthInstance();

@@ -25,16 +25,36 @@ instance.interceptors.request.use(
 );
 
 instance.interceptors.response.use(
-  response => {
-    return response;
-  },
+  response => response,
   error => {
-    //handle 401
-    if (error.response && error.response.status === 401) {
-      store.dispatch("user/logoutAction");
+    const originalRequest = error.config;
+    if (
+      error.response.status === 401 &&
+      error.response.statusText === "Unauthorized"
+    ) {
+      // access token -> 向 API 拿新的 token
+      const refresh_token = store.state.user.r;
+      return axios
+        .post(process.env.VUE_APP_BASE_API + "f/auth/token/refresh/", {
+          refresh: refresh_token
+        })
+        .then(response => {
+          this.$store.dispatch("user/setToken", {
+            access_token: response.data.access
+          });
+          instance.defaults.headers["Authorization"] =
+            "Bearer " + response.data.access;
+          originalRequest.headers["Authorization"] =
+            "Bearer " + response.data.access;
+          return instance(originalRequest);
+        })
+        .catch(err => {
+          // refresh token 過期 -> 直接當作完全沒有登入
+          this.$store.dispatch("user/logoutAction");
+          console.log(err);
+        });
     }
-    return error;
-    // return Promise.reject(error);
+    return Promise.reject(error);
   }
 );
 
