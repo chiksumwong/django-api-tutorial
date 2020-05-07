@@ -78,8 +78,37 @@
         <b-button @click="logoutWithFacebook()">Logout with Facebook</b-button>
         <b-button @click="getFacebookProfile()">getFacebookProfile</b-button> -->
         <div class="text-center">
+          <b-button
+            class="btn-outline-dark w-75 text-left"
+            variant="white"
+            id="googleSignIn"
+            @click="loginWithGoogle()"
+          >
+            <img
+              class="mb-1"
+              width="20px"
+              height="20px"
+              alt="Google sign-in"
+              src="@/assets/icon/Google_logo.png"
+            />
+            Login with Google
+          </b-button>
+          <b-button
+            class="btn-outline-dark w-75 mt-1 text-left"
+            variant="white"
+            @click="loginWithFacebook()"
+          >
+            <img
+              class="mb-1"
+              width="20px"
+              alt="Facebook sign-in"
+              src="@/assets/icon/Facebook_logo.png"
+            />
+            Login with Facebook
+          </b-button>
+
           <!-- Google and Facebook Login Button -->
-          <button
+          <!-- <button
             class="loginBtn loginBtn--google"
             id="googleSignIn"
             @click="loginWithGoogle()"
@@ -91,7 +120,7 @@
             @click="loginWithFacebook()"
           >
             Login with Facebook
-          </button>
+          </button> -->
         </div>
       </b-form>
     </div>
@@ -261,8 +290,8 @@ export default {
 .button-item {
   background-color: #343a40;
 }
-
-.loginBtn {
+/* Google and Facebook Button */
+/* .loginBtn {
   box-sizing: border-box;
   position: relative;
   width: 13em;
@@ -290,11 +319,11 @@ export default {
 }
 .loginBtn:active {
   box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
-}
+} */
 
 /* Google */
-.loginBtn--google {
-  /*font-family: "Roboto", Roboto, arial, sans-serif;*/
+/* .loginBtn--google {
+  font-family: "Roboto", Roboto, arial, sans-serif;
   background: #dd4b39;
 }
 .loginBtn--google:before {
@@ -305,13 +334,13 @@ export default {
 .loginBtn--google:hover,
 .loginBtn--google:focus {
   background: #e74b37;
-}
+} */
 
 /* Facebook */
-.loginBtn--facebook {
+/* .loginBtn--facebook {
   background-color: #4c69ba;
   background-image: linear-gradient(#4c69ba, #3b55a0);
-  /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
+  font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;
   text-shadow: 0 -1px 0 #354c8c;
 }
 .loginBtn--facebook:before {
@@ -323,5 +352,5 @@ export default {
 .loginBtn--facebook:focus {
   background-color: #5b7bd5;
   background-image: linear-gradient(#5b7bd5, #4864b1);
-}
+} */
 </style>
