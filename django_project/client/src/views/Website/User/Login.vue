@@ -79,7 +79,7 @@
         <b-button @click="getFacebookProfile()">getFacebookProfile</b-button> -->
         <div class="text-center">
           <b-button
-            class="btn-outline-dark w-75 text-left"
+            class="btn-outline-dark w-75"
             variant="white"
             id="googleSignIn"
             @click="loginWithGoogle()"
@@ -94,7 +94,7 @@
             Login with Google
           </b-button>
           <b-button
-            class="btn-outline-dark w-75 mt-1 text-left"
+            class="btn-outline-dark w-75 mt-1"
             variant="white"
             @click="loginWithFacebook()"
           >
@@ -106,6 +106,23 @@
             />
             Login with Facebook
           </b-button>
+          <b-button
+            class="btn-outline-dark w-75 mt-1"
+            variant="white"
+            @click="loginWithMicrosoft()"
+          >
+            <img
+              class="mb-1"
+              width="20px"
+              alt="Microsoft sign-in"
+              src="@/assets/icon/Microsoft_logo.png"
+            />
+            Login with Microsoft
+          </b-button>
+
+          <!-- <b-button @click="logoutWithMicrosoft()">
+            Logout with Microsoft
+          </b-button> -->
 
           <!-- Google and Facebook Login Button -->
           <!-- <button
@@ -129,9 +146,12 @@
 
 <script>
 import { required } from "vuelidate/lib/validators";
+import * as Msal from "msal";
+
 export default {
   data() {
     return {
+      myMSALObj: Object,
       form: {
         username: "",
         password: ""
@@ -255,10 +275,47 @@ export default {
       js.id = id;
       js.src = "https://connect.facebook.net/en_US/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
+    },
+    // Microsoft
+    initMicrosoft() {
+      const msalConfig = {
+        auth: {
+          clientId: process.env.VUE_APP_MICROSOFT_CLIENT_ID,
+          authority: "https://login.microsoftonline.com/consumers",
+          redirectUri: "https://localhost:8080/"
+        },
+        cache: {
+          cacheLocation: "sessionStorage", // This configures where your cache will be stored
+          storeAuthStateInCookie: false // Set this to "true" if you are having issues on IE11 or Edge
+        }
+      };
+      const myMSALObj = new Msal.UserAgentApplication(msalConfig);
+      this.myMSALObj = myMSALObj;
+    },
+    loginWithMicrosoft() {
+      const loginRequest = {
+        scopes: ["openid", "profile", "User.Read"]
+      };
+      this.myMSALObj
+        .loginPopup(loginRequest)
+        .then(loginResponse => {
+          console.log("id_token acquired at: " + new Date().toString());
+          console.log(loginResponse);
+          if (this.myMSALObj.getAccount()) {
+            console.log(this.myMSALObj.getAccount());
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    logoutWithMicrosoft() {
+      this.myMSALObj.logout();
     }
   },
   mounted() {
     this.initGoogle();
+    this.initMicrosoft();
     if (!window.FB) {
       this.loadFacebookSDK(document, "script", "facebook-jssdk");
       this.initFacebook();
