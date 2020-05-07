@@ -12,6 +12,7 @@ module.exports = {
   //     return args;
   //   });
   // },
+  /* https of localhost */
   devServer: {
     https: {
       key: fs.readFileSync(`${__dirname}/src/assets/https/localhost-key.pem`),

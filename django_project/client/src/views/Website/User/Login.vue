@@ -67,22 +67,32 @@
         <router-link to="/forgot_password">Forgot Password</router-link> -->
 
         <!-- Google Sign-in -->
-        <div id="gSignInWrapper">
-          <div id="customBtn" class="customGPlusSignIn">
-            <span id="Icon"></span>
-            <span id="ButtonText">Google</span>
-          </div>
-        </div>
-        <div id="name"></div>
-
-        <!-- <div id="google-signin-button"></div>
-        <b-button squared size="sm" class="button-item" @click="signOut()"
+        <!-- <b-button id="googleSignIn" size="sm" @click="loginWithGoogle()"
+          >Google Sign In</b-button
+        >
+        <b-button squared size="sm" @click="logoutWithGoogle()"
           >Google Sign Out</b-button
         > -->
         <!-- Facebook Sign-in -->
-        <b-button @click="logInWithFacebook()">Login with Facebook</b-button>
+        <!-- <b-button @click="loginWithFacebook()">Login with Facebook</b-button>
         <b-button @click="logoutWithFacebook()">Logout with Facebook</b-button>
-        <b-button @click="getFacebookProfile()">getFacebookProfile</b-button>
+        <b-button @click="getFacebookProfile()">getFacebookProfile</b-button> -->
+        <div class="text-center">
+          <!-- Google and Facebook Login Button -->
+          <button
+            class="loginBtn loginBtn--google"
+            id="googleSignIn"
+            @click="loginWithGoogle()"
+          >
+            Login with Google
+          </button>
+          <button
+            class="loginBtn loginBtn--facebook"
+            @click="loginWithFacebook()"
+          >
+            Login with Facebook
+          </button>
+        </div>
       </b-form>
     </div>
   </b-container>
@@ -93,7 +103,6 @@ import { required } from "vuelidate/lib/validators";
 export default {
   data() {
     return {
-      auth2: Object,
       form: {
         username: "",
         password: ""
@@ -131,46 +140,36 @@ export default {
       }
     },
     // Google
-    // onSuccess(googleUser) {
-    //   const profile = googleUser.getBasicProfile();
-    //   console.log("profile: ", profile);
-    // },
-    // onFailure(error) {
-    //   console.log(error);
-    // },
-    // signOut() {
-    //   var auth2 = window.gapi.auth2.getAuthInstance();
-    //   auth2.signOut().then(function() {
-    //     console.log("User signed out.");
-    //   });
-    // },
-    attachSignin(element) {
-      console.log("element", element);
-      this.auth2.attachClickHandler(
-        element,
+    loginWithGoogle() {
+      let auth2 = window.gapi.auth2.getAuthInstance();
+      auth2.attachClickHandler(
+        "googleSignIn",
         {},
         function(googleUser) {
-          document.getElementById("name").innerText =
-            "Signed in: " + googleUser.getBasicProfile().getName();
+          console.log(googleUser.getBasicProfile());
         },
         function(error) {
           alert(JSON.stringify(error, undefined, 2));
         }
       );
     },
+    logoutWithGoogle() {
+      let auth2 = window.gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function() {
+        console.log("User signed out.");
+      });
+    },
     initGoogle() {
-      let vm = this;
       window.gapi.load("auth2", function() {
-        vm.auth2 = window.gapi.auth2.init({
+        window.gapi.auth2.init({
           client_id: process.env.VUE_APP_GOOGLE_CLIENT_ID,
           cookiepolicy: "single_host_origin",
           scope: "profile email"
         });
-        vm.attachSignin(document.getElementById("customBtn"));
       });
     },
     // Facebook
-    logInWithFacebook() {
+    loginWithFacebook() {
       const vm = this;
       window.FB.getLoginStatus(function(response) {
         if (response.status === "connected") {
@@ -230,14 +229,6 @@ export default {
     }
   },
   mounted() {
-    // window.gapi.signin2.render("google-signin-button", {
-    //   scope: "profile email",
-    //   width: 240,
-    //   height: 50,
-    //   longtitle: true,
-    //   onsuccess: this.onSuccess,
-    //   onfailure: this.onFailure
-    // });
     this.initGoogle();
     if (!window.FB) {
       this.loadFacebookSDK(document, "script", "facebook-jssdk");
@@ -270,36 +261,67 @@ export default {
 .button-item {
   background-color: #343a40;
 }
-/* Google */
-#customBtn {
-  display: inline-block;
-  background: white;
-  color: #444;
-  width: 190px;
-  border-radius: 5px;
-  border: thin solid #888;
-  box-shadow: 1px 1px 1px grey;
+
+.loginBtn {
+  box-sizing: border-box;
+  position: relative;
+  width: 13em;
+  margin: 0.2em;
+  padding: 0 15px 0 46px;
+  border: none;
+  text-align: left;
+  line-height: 34px;
   white-space: nowrap;
+  border-radius: 0.2em;
+  font-size: 16px;
+  color: #fff;
 }
-#customBtn:hover {
-  cursor: pointer;
+.loginBtn:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 100%;
 }
-#Icon {
-  background: url("/identity/sign-in/g-normal.png") transparent 5px 50%
-    no-repeat;
-  display: inline-block;
-  vertical-align: middle;
-  width: 42px;
-  height: 42px;
+.loginBtn:focus {
+  outline: none;
 }
-#ButtonText {
-  display: inline-block;
-  vertical-align: middle;
-  padding-left: 42px;
-  padding-right: 42px;
-  font-size: 14px;
-  font-weight: bold;
-  /* Use the Roboto font that is loaded in the <head> */
-  font-family: "Roboto", sans-serif;
+.loginBtn:active {
+  box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Google */
+.loginBtn--google {
+  /*font-family: "Roboto", Roboto, arial, sans-serif;*/
+  background: #dd4b39;
+}
+.loginBtn--google:before {
+  border-right: #bb3f30 1px solid;
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png")
+    6px 6px no-repeat;
+}
+.loginBtn--google:hover,
+.loginBtn--google:focus {
+  background: #e74b37;
+}
+
+/* Facebook */
+.loginBtn--facebook {
+  background-color: #4c69ba;
+  background-image: linear-gradient(#4c69ba, #3b55a0);
+  /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
+  text-shadow: 0 -1px 0 #354c8c;
+}
+.loginBtn--facebook:before {
+  border-right: #364e92 1px solid;
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png")
+    6px 6px no-repeat;
+}
+.loginBtn--facebook:hover,
+.loginBtn--facebook:focus {
+  background-color: #5b7bd5;
+  background-image: linear-gradient(#5b7bd5, #4864b1);
 }
 </style>
