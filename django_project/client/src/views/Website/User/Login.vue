@@ -199,8 +199,18 @@ export default {
         this.form.password = "";
       }
     },
+    async getTokenWithGoogle() {
+      const res = await UserAPI.getToken({
+        token: this.googld_id_token
+      });
+      if (res.data) {
+        console.log("Login Success: ", res.data);
+      } else {
+        console.log("Fail");
+      }
+    },
     // Google
-    async loginWithGoogle() {
+    loginWithGoogle() {
       let vm = this;
       let auth2 = window.gapi.auth2.getAuthInstance();
       auth2.attachClickHandler(
@@ -224,14 +234,7 @@ export default {
           alert(JSON.stringify(error, undefined, 2));
         }
       );
-      const res = await UserAPI.getToken({
-        token: this.googld_id_token
-      });
-      if (res.data) {
-        console.log("Login Success: ", res.data);
-      } else {
-        console.log("Fail");
-      }
+      this.getTokenWithGoogle();
     },
     logoutWithGoogle() {
       let auth2 = window.gapi.auth2.getAuthInstance();
@@ -254,11 +257,13 @@ export default {
       window.FB.getLoginStatus(function(response) {
         if (response.status === "connected") {
           vm.getFacebookProfile();
+          console.log("Facebook Auth Response", response.authResponse);
         } else {
           window.FB.login(
             function(response) {
-              if (response.authResponse) {
+              if (response.status === "connected") {
                 vm.getFacebookProfile();
+                console.log("Facebook Auth Response", response.authResponse);
               } else {
                 alert("User cancelled login or did not fully authorize.");
               }

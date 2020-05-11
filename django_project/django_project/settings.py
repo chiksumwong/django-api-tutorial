@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'oauth2_provider',  # oAuth
     # Function
     'f_auth',
-    'f_oauth',
+    'f_social_login',
     'f_calendar',
     'f_schedule_job',
     'f_system_log',

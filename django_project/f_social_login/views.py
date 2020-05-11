@@ -3,8 +3,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from f_oauth.serializers import SocialLoginSerializer
-
+from f_social_login.serializers import GoogleLoginSerializer, FacebookLoginSerializer
 
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
@@ -15,11 +14,22 @@ def get_tokens_for_user(user):
 
 
 class GoogleLogin(TokenObtainPairView):
-    permission_classes = (AllowAny, )  # AllowAny for login
-    serializer_class = SocialLoginSerializer
+    permission_classes = [AllowAny]  # AllowAny for login
 
     def post(self, request):
-        serializer = self.get_serializer(data=request.data)
+        serializer = GoogleLoginSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            user = serializer.save()
+            return Response(get_tokens_for_user(user))
+        else:
+            raise ValueError('Not serializable')
+
+
+class FacebookLogin(TokenObtainPairView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = FacebookLoginSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             user = serializer.save()
             return Response(get_tokens_for_user(user))

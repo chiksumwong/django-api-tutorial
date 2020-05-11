@@ -4,12 +4,13 @@ from google.oauth2 import id_token
 from google.auth.transport import requests
 
 from django_project.settings_dev_local import GOOGLE_CLIENT_ID
-from f_oauth.models import SocialAccount
+from f_social_login.apis.facebook_api import verify_token, get_app_token, get_user_profile
+from f_social_login.models import SocialAccount
 
 User = get_user_model()
 
 
-class SocialLoginSerializer(serializers.Serializer):
+class GoogleLoginSerializer(serializers.Serializer):
 
     token = serializers.CharField(required=True)
 
@@ -46,3 +47,38 @@ class SocialLoginSerializer(serializers.Serializer):
         else:
             raise ValueError("Incorrect Credentials")
 
+
+class FacebookLoginSerializer(serializers.Serializer):
+
+    token = serializers.CharField(required=True)
+
+    def verify_token(self, token):
+        try:
+            f_dist = verify_token(token, get_app_token())
+            if f_dist.get('data').get('is_valid'):
+                return f_dist
+        except ValueError:
+            pass
+
+    def create(self, validated_data):
+        f_dist = self.verify_token(validated_data.get('token'))
+        if f_dist:
+            # Get Facebook User Info
+            f_user = get_user_profile(validated_data.get('token'))
+            if not SocialAccount.objects.filter(unique_id=f_user['id']).exists():
+                user = User.objects.create_user(
+                    username=f"{f_user['name']} {f_user['email']}",  # Username has to be unique
+                    email=f_user['email']
+                )
+                SocialAccount.objects.create(
+                    provider='facebook',
+                    user=user,
+                    unique_id=f_user['id'],
+                    access_token=validated_data.get('token')
+                )
+                return user
+            else:
+                social = SocialAccount.objects.get(unique_id=f_user['id'])
+                return social.user
+        else:
+            raise ValueError("Incorrect Credentials")

@@ -15,7 +15,7 @@ urlpatterns = [
     path('api/f/', include('f_system_log.urls')),
     path('api/f/', include('f_schedule_job.urls')),
     path('api/f/', include('f_auth.urls')),
-    path('api/f/', include('f_oauth.urls')),
+    path('api/f/', include('f_social_login.urls')),
     path('api/f/', include('f_calendar.urls')),
     path('api/a/', include('a_shop.urls')),
     re_path(r'^((?!media).)*$', TemplateView.as_view(template_name="index.html"))
