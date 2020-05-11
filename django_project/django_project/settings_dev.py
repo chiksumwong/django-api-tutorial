@@ -39,5 +39,10 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-# Google Client ID
+# Social Login - Google
 GOOGLE_CLIENT_ID = ''
+
+
+# Social Login - Facebook
+FACEBOOK_CLIENT_ID = ''
+FACEBOOK_CLIENT_SECRET = ''

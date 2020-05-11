@@ -4,7 +4,7 @@ from google.oauth2 import id_token
 from google.auth.transport import requests
 
 from django_project.settings_dev_local import GOOGLE_CLIENT_ID
-from f_social_login.apis.facebook_api import verify_token, get_app_token, get_user_profile
+from f_social_login.apis.facebook_api import verify_token, get_app_token, get_user_profile, get_long_lived_token
 from f_social_login.models import SocialAccount
 
 User = get_user_model()
@@ -38,7 +38,8 @@ class GoogleLoginSerializer(serializers.Serializer):
                 )
                 SocialAccount.objects.create(
                     user=user,
-                    unique_id=id_info['sub']
+                    unique_id=id_info['sub'],
+                    access_token=validated_data.get('token')
                 )
                 return user
             else:
@@ -70,11 +71,12 @@ class FacebookLoginSerializer(serializers.Serializer):
                     username=f"{f_user['name']} {f_user['email']}",  # Username has to be unique
                     email=f_user['email']
                 )
+                l_access_token = get_long_lived_token(validated_data.get('token')).get('access_token')
                 SocialAccount.objects.create(
                     provider='facebook',
                     user=user,
                     unique_id=f_user['id'],
-                    access_token=validated_data.get('token')
+                    access_token=l_access_token
                 )
                 return user
             else:

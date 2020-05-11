@@ -28,8 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Third Party Apps
-    'corsheaders',  # CORS
     'rest_framework',  # API
+    'corsheaders',  # CORS
     'django_apscheduler',  # Scheduler
     'oauth2_provider',  # oAuth
     # Function

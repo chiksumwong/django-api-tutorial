@@ -5,9 +5,9 @@ from django_project.settings_dev_local import FACEBOOK_CLIENT_ID, FACEBOOK_CLIEN
 
 def get_app_token():
     params = {
+        'grant_type': 'client_credentials',
         'client_id': FACEBOOK_CLIENT_ID,
-        'client_secret': FACEBOOK_CLIENT_SECRET,
-        'grant_type': 'client_credentials'
+        'client_secret': FACEBOOK_CLIENT_SECRET
     }
     r = requests.get('https://graph.facebook.com/oauth/access_token?', params=params)
     print('Get Facebook App Token: ', r.json().get('access_token'))
@@ -23,6 +23,17 @@ def verify_token(input_token, app_token):
     return r.json()
 
 
+def get_long_lived_token(access_token):
+    params = {
+        'grant_type': 'fb_exchange_token',
+        'client_id': FACEBOOK_CLIENT_ID,
+        'client_secret': FACEBOOK_CLIENT_SECRET,
+        'fb_exchange_token': access_token
+    }
+    r = requests.get('https://graph.facebook.com/oauth/access_token?', params=params)
+    return r.json()
+
+
 def get_user_profile(access_token):
     params = {
         'access_token': access_token,
@@ -33,9 +44,11 @@ def get_user_profile(access_token):
 
 
 if __name__ == '__main__':
-    access_token = 'EAADo0w7jw7YBAKVxLWCnqN8LdfjM7mCrWtmQZAhuwVZBRW1rWNSJb2Ll8Uo5lct5rZBUZB0vrp7HZC1rVK7pZAQ2kck7xn6UZA2cEd5BPs9PPxlGKwiiePtPEoSlF9JCKgfESNTPCD0CdKCBZAmpfqZBRk6Eu4pD3iNqwZCPJUNy4zE6rpDxaRPNqGs1Sva8WbZC3DREXt9KeBXGqJThTTPeqlpxQHo17TmRmsZD'
-    r = verify_token(access_token, get_app_token())
-    print(r)
-    print(r.get('data').get('is_valid'))
-    print(get_user_profile(access_token))
-
+    short_access_token = 'EAADo0w7jw7YBAGPw8PHp4zfiQYe9Av4atmoBZCJQ3hzPKaT5GL2vN1DCbPUFAsADKnRAeEJOEryNZCEY3qaZCq7eJB5Fj60NqZAlXaT6NqVxwMfJT9bgVFpHmNZBTqRQgOXLBXUIiM3kZCGuLldOLmZBXn5hfLEefz8S0K3Ef0Li84uZCDA03ETrR7l9UfvpXpDX4hq9ZArYJNZB47NFqOMvqH'
+    rr = verify_token(short_access_token, get_app_token())
+    print(rr)
+    print(rr.get('data').get('is_valid'))
+    long_access_token = get_long_lived_token(short_access_token)
+    print(long_access_token)
+    at_long = long_access_token.get('access_token')
+    print(get_user_profile(at_long))
