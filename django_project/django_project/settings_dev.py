@@ -41,7 +41,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Social Login - Google
 GOOGLE_CLIENT_ID = ''
-
+GOOGLE_CLIENT_SECRET = ''
 
 # Social Login - Facebook
 FACEBOOK_CLIENT_ID = ''

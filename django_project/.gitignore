@@ -24,3 +24,6 @@ yarn-error.log*
 # Djanog
 django_project/settings_dev_local.py
 media/documents
+
+# Google
+google_client_secret.json

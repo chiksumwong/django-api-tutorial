@@ -16,14 +16,14 @@ class GoogleLoginSerializer(serializers.Serializer):
 
     def verify_token(self, token):
         try:
-            idinfo = id_token.verify_oauth2_token(
-                token, requests.Request(), GOOGLE_CLIENT_ID)
-            if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+            id_info = id_token.verify_oauth2_token(token, requests.Request(), GOOGLE_CLIENT_ID)
+            print("Google Verify: ", id_info)
+            if id_info['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
                 raise ValueError('Wrong issuer.')
-            if idinfo['aud'] not in [GOOGLE_CLIENT_ID]:
+            if id_info['aud'] not in [GOOGLE_CLIENT_ID]:
                 raise ValueError('Could not verify audience.')
             # Success
-            return idinfo
+            return id_info
         except ValueError:
             pass
 
@@ -39,7 +39,7 @@ class GoogleLoginSerializer(serializers.Serializer):
                 SocialAccount.objects.create(
                     user=user,
                     unique_id=id_info['sub'],
-                    access_token=validated_data.get('token')
+                    access_token=validated_data.get('access_token')
                 )
                 return user
             else:

@@ -226,6 +226,10 @@ export default {
           console.log("Image URL: " + profile.getImageUrl());
           console.log("Email: " + profile.getEmail());
           // The ID token you need to pass to your backend:
+          console.log(
+            "Get Auth Response: ",
+            googleUser.getAuthResponse().access_token
+          );
           var id_token = googleUser.getAuthResponse().id_token;
           console.log("ID Token: " + id_token);
           vm.googld_id_token = id_token;
@@ -247,7 +251,8 @@ export default {
         window.gapi.auth2.init({
           client_id: process.env.VUE_APP_GOOGLE_CLIENT_ID,
           cookiepolicy: "single_host_origin",
-          scope: "profile email"
+          scope:
+            "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/userinfo.email"
         });
       });
     },
