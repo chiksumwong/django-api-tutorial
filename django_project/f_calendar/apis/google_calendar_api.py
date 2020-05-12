@@ -52,6 +52,6 @@ def create_event(access_token, calendar_id):
 
 if __name__ == '__main__':
     input_access_token = 'ya29.a0AfH6SMBzkJvkClx_ArE9DfXHfaLORR0UyvlwXuXh6Q09eoOPFbJMhCc8TCLJxz-_1L653-94OEeYMval1gCBBarw697-kwGagljVb8Gcj4JtBtvX0ZGQJEEpFvXFacGbpy3KJPHuWplrso3QiFPyKRUBwszr7MTBolM'
-    input_calendar_id = 'chiksumwong@codefreesoft.com'
+    input_calendar_id = ''
     # get_calendar_setting(input_access_token)
     print(create_event(input_access_token, input_calendar_id))

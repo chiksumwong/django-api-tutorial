@@ -335,16 +335,40 @@ export default {
     },
     loginWithMicrosoft() {
       const loginRequest = {
-        scopes: ["openid", "profile", "User.Read"]
+        scopes: [
+          "openid",
+          "profile",
+          "User.Read",
+          "Mail.Read",
+          "Calendars.ReadWrite"
+        ]
       };
       this.myMSALObj
         .loginPopup(loginRequest)
         .then(loginResponse => {
           console.log("id_token acquired at: " + new Date().toString());
           console.log(loginResponse);
-          if (this.myMSALObj.getAccount()) {
-            console.log(this.myMSALObj.getAccount());
-          }
+          this.getTokenOfMicrosoft();
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    getTokenOfMicrosoft() {
+      const loginRequest = {
+        scopes: [
+          "openid",
+          "profile",
+          "User.Read",
+          "Mail.Read",
+          "Calendars.ReadWrite"
+        ]
+      };
+      this.myMSALObj
+        .acquireTokenSilent(loginRequest)
+        .then(tokenResponse => {
+          // Callback code here
+          console.log("M Token: ", tokenResponse);
         })
         .catch(error => {
           console.log(error);

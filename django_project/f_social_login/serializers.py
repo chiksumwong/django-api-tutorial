@@ -84,3 +84,40 @@ class FacebookLoginSerializer(serializers.Serializer):
                 return social.user
         else:
             raise ValueError("Incorrect Credentials")
+
+
+class MicrosoftLoginSerializer(serializers.Serializer):
+
+    token = serializers.CharField(required=True)
+
+    def verify_token(self, token):
+        try:
+            f_dist = verify_token(token, get_app_token())
+            if f_dist.get('data').get('is_valid'):
+                return f_dist
+        except ValueError:
+            pass
+
+    def create(self, validated_data):
+        f_dist = self.verify_token(validated_data.get('token'))
+        if f_dist:
+            # Get Facebook User Info
+            f_user = get_user_profile(validated_data.get('token'))
+            if not SocialAccount.objects.filter(unique_id=f_user['id']).exists():
+                user = User.objects.create_user(
+                    username=f"{f_user['name']} {f_user['email']}",  # Username has to be unique
+                    email=f_user['email']
+                )
+                l_access_token = get_long_lived_token(validated_data.get('token')).get('token')
+                SocialAccount.objects.create(
+                    provider='microsoft',
+                    user=user,
+                    unique_id=f_user['id'],
+                    access_token=l_access_token
+                )
+                return user
+            else:
+                social = SocialAccount.objects.get(unique_id=f_user['id'])
+                return social.user
+        else:
+            raise ValueError("Incorrect Credentials")
