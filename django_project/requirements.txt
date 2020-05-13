@@ -10,3 +10,4 @@ requests==2.23.0
 pillow==7.1.2
 google-auth==1.14.3
 google-api-python-client==1.8.2
+msal==1.2.0
