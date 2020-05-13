@@ -22,5 +22,5 @@ yarn-error.log*
 
 
 # Djanog
-django_project/settings_dev_local.py
+django_project/.env
 media/documents

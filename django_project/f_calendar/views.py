@@ -3,9 +3,9 @@ from googleapiclient.discovery import build
 import google.oauth2.credentials
 
 
-def main():
+def get_events(access_token):
     credentials = google.oauth2.credentials.Credentials(
-        'ya29.a0AfH6SMDW80JS4WhZF5aKySeZyeiW15mK06Q34UyPm1U7fEw2scUGfbegIFSv6tSOJUV21MWn765g0cx2oEA2SvwkgePL_cwnLR9wTAuenhhYqKtKAJcupClih0kdpOiRrm7d_uadjqGmncfR8OIZUbUGVX4vo-1RX1g')
+        access_token)
 
     service = build('calendar', 'v3', credentials=credentials)
 
@@ -28,4 +28,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    input_access_token = ''
+    get_events(input_access_token)

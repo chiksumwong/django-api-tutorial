@@ -1,6 +1,6 @@
 import requests
 
-from django_project.settings_dev_local import FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET
+from django_project.settings import FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET
 
 
 def get_app_token():
@@ -44,7 +44,7 @@ def get_user_profile(access_token):
 
 
 if __name__ == '__main__':
-    short_access_token = 'EAADo0w7jw7YBAGPw8PHp4zfiQYe9Av4atmoBZCJQ3hzPKaT5GL2vN1DCbPUFAsADKnRAeEJOEryNZCEY3qaZCq7eJB5Fj60NqZAlXaT6NqVxwMfJT9bgVFpHmNZBTqRQgOXLBXUIiM3kZCGuLldOLmZBXn5hfLEefz8S0K3Ef0Li84uZCDA03ETrR7l9UfvpXpDX4hq9ZArYJNZB47NFqOMvqH'
+    short_access_token = ''
     rr = verify_token(short_access_token, get_app_token())
     print(rr)
     print(rr.get('data').get('is_valid'))

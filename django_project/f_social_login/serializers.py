@@ -3,7 +3,7 @@ from rest_framework import serializers
 from google.oauth2 import id_token
 from google.auth.transport import requests
 
-from django_project.settings_dev_local import GOOGLE_CLIENT_ID
+from django_project.settings import GOOGLE_CLIENT_ID
 from f_social_login.apis.facebook_api import verify_token, get_app_token, get_user_profile, get_long_lived_token
 from f_social_login.apis.microsoft_api import get_user_info
 from f_social_login.models import SocialAccount
@@ -30,7 +30,6 @@ class GoogleLoginSerializer(serializers.Serializer):
     def create(self, validated_data):
         g_user = self.verify_token(validated_data.get('token'))
         if g_user:
-            # User not exists
             if not SocialAccount.objects.filter(unique_id=g_user['sub']).exists():
                 user = User.objects.create_user(
                     username=f"{g_user['name']} {g_user['email']}",  # Username has to be unique
@@ -63,7 +62,6 @@ class FacebookLoginSerializer(serializers.Serializer):
     def create(self, validated_data):
         f_dist = self.verify_token(validated_data.get('token'))
         if f_dist:
-            # Get Facebook User Info
             f_user = get_user_profile(validated_data.get('token'))
             if not SocialAccount.objects.filter(unique_id=f_user['id']).exists():
                 user = User.objects.create_user(
@@ -89,20 +87,22 @@ class MicrosoftLoginSerializer(serializers.Serializer):
     token = serializers.CharField(required=True)
 
     def create(self, validated_data):
-        # Get Facebook User Info
         m_user = get_user_info(validated_data.get('token'))
-        if not SocialAccount.objects.filter(unique_id=m_user['id']).exists():
-            user = User.objects.create_user(
-                username=f"{m_user['displayName']} {m_user['userPrincipalName']}",  # Username has to be unique
-                email=m_user['userPrincipalName']
-            )
-            SocialAccount.objects.create(
-                provider='microsoft',
-                user=user,
-                unique_id=m_user['id'],
-                access_token=validated_data.get('token')
-            )
-            return user
+        if m_user:
+            if not SocialAccount.objects.filter(unique_id=m_user['id']).exists():
+                user = User.objects.create_user(
+                    username=f"{m_user['displayName']} {m_user['userPrincipalName']}",  # Username has to be unique
+                    email=m_user['userPrincipalName']
+                )
+                SocialAccount.objects.create(
+                    provider='microsoft',
+                    user=user,
+                    unique_id=m_user['id'],
+                    access_token=validated_data.get('token')
+                )
+                return user
+            else:
+                social = SocialAccount.objects.get(unique_id=m_user['id'])
+                return social.user
         else:
-            social = SocialAccount.objects.get(unique_id=m_user['id'])
-            return social.user
+            raise ValueError("Incorrect Credentials")
