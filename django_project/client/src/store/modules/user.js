@@ -60,6 +60,8 @@ export default {
       state.i = null;
       state.l = false;
       state.a = false;
+      state.t = null;
+      state.r = null;
     },
     logout(state) {
       state.n = null;

@@ -100,12 +100,10 @@ export default {
   },
   computed: {
     isLogin() {
-      // return this.$store.state.user.status.isLogin;
-      return false;
+      return this.$store.state.user.l;
     },
     isAdmin() {
-      // return this.$store.state.user.isAdmin;
-      return false;
+      return this.$store.state.user.a;
     },
     fs_s() {
       return this.$store.state.system.fs_s;

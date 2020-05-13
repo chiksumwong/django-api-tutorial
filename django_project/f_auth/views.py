@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 
 from a_shop.models import Customer
 from a_shop.serializers import CustomerSerializer
-from f_auth.serializer import UserSerializer, GroupSerializer
+from f_auth.serializers import UserSerializer, GroupSerializer
 from f_system_log.helpers.log import save_audit_log, save_access_log
 
 User = get_user_model()

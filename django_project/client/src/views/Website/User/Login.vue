@@ -182,16 +182,17 @@ export default {
       }
 
       // start if valid
-      this.getToken();
+      this.getJWT();
     },
-    async getToken() {
+    async getJWT() {
       const username = this.form.username;
       const password = this.form.password;
-      const res = await UserAPI.getToken({
+      const res = await UserAPI.getJWTToken({
         username,
         password
       });
       if (res.data) {
+        console.log("Get JWT Token: ", res.data);
         this.$store.dispatch("user/login", { token: res.data.access });
       } else {
         this.loginFail = true;
@@ -199,12 +200,13 @@ export default {
         this.form.password = "";
       }
     },
-    async getTokenWithGoogle() {
-      const res = await UserAPI.getToken({
-        token: this.googld_id_token
+    async getJWTWithGoogle(access_token, id_token) {
+      const res = await UserAPI.getGoogleJWTToken({
+        access_token: access_token,
+        id_token: id_token
       });
       if (res.data) {
-        console.log("Login Success: ", res.data);
+        console.log("Get JWTWithGoogle Success: ", res.data);
       } else {
         console.log("Fail");
       }
@@ -238,7 +240,7 @@ export default {
           alert(JSON.stringify(error, undefined, 2));
         }
       );
-      this.getTokenWithGoogle();
+      this.getJWTWithGoogle();
     },
     logoutWithGoogle() {
       let auth2 = window.gapi.auth2.getAuthInstance();
