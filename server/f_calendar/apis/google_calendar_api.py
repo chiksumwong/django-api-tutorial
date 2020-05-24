@@ -1,6 +1,9 @@
 import json
+import os
 
 import requests
+
+from server.settings import BASE_DIR
 
 
 def get_calendar_setting(access_token):

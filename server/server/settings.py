@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 # .env
+from datetime import timedelta
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -73,7 +75,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # 'DIRS': [],
-        'DIRS': [os.path.join(BASE_DIR, 'dist')],  # Vue
+        'DIRS': [os.path.join(os.path.dirname(BASE_DIR), 'client\\dist')],  # Vue
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -155,7 +157,7 @@ STATIC_URL = '/static/'
 # ========================================== Additional Settings ==========================================
 # Vue
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'dist/static'),
+    os.path.join(os.path.dirname(BASE_DIR), 'client\\dist'),
 ]
 
 # Files - For File and Image Upload

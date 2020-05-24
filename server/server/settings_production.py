@@ -1,4 +1,4 @@
-from django_project.settings import *
+from server.settings import *
 
 DEBUG = False
 

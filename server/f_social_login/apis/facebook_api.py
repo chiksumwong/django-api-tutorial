@@ -1,6 +1,6 @@
 import requests
 
-from django_project.settings import FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET
+from server.settings import FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET
 
 
 def get_app_token():

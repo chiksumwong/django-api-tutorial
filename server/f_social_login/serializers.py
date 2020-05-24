@@ -3,7 +3,7 @@ from rest_framework import serializers
 from google.oauth2 import id_token
 from google.auth.transport import requests
 
-from django_project.settings import GOOGLE_CLIENT_ID
+from server.settings import GOOGLE_CLIENT_ID
 from f_social_login.apis.facebook_api import verify_token, get_app_token, get_user_profile, get_long_lived_token
 from f_social_login.apis.microsoft_api import get_user_info
 from f_social_login.models import SocialAccount

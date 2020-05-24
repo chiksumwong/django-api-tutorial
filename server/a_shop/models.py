@@ -2,7 +2,7 @@ import uuid
 
 from django.db import models
 
-from django_project import settings
+from server import settings
 
 
 class Mayor(models.Model):
