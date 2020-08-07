@@ -48,6 +48,14 @@ $ python manage.py runserver 0.0.0.0:8000  # if you set the internal ip in ALLOW
 ## IDE (PyCharm) Setup
 File > Setting > Project > Project Interpreter > Show All > Add > Existing environment > Interpreter > [Env]/Scripts/python.exe
 
+## Run Script with Django Model (PyCharm)
+1. PyCharm Setting: Run > Edit Configurations > Environment Variables > ;DJANGO_SETTINGS_MODULE=your_project_name.settings
+2. Put the following code before call your model
+```
+import django
+django.setup()
+```
+
 ## Package Requirement
 - django
 - diangorestframework
