@@ -7,6 +7,6 @@ django-cors-headers==3.2.1
 django-apscheduler==0.3.0
 APScheduler==3.6.3
 requests==2.23.0
-pillow==7.1.2  # for model image field
+pillow==8.1.1  # for model image field
 google-auth==1.14.3
 google-api-python-client==1.8.3
