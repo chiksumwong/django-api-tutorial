@@ -1,8 +1,14 @@
 # Serializer
 
+## Django REST Framework Introduction
+- Provide Serializer
+- MiXin Extend
+- Simplify View Code
+
 ## Serializer Introduction
 - Python Object --> JSON (Render)
 - JSON --> Python Object (Parser)
+- Validation
 
 ## Type of Serializer
 ### "Serializer" (Basic Type, Extend BaseSerializer)
