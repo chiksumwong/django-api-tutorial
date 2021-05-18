@@ -4,6 +4,7 @@
 - Provide Serializer
 - MiXin Extend
 - Simplify View Code
+- Increase the speed of API developing
 
 ## Serializer Introduction
 - Python Object --> JSON (Render)
