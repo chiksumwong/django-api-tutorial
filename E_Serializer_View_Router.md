@@ -13,12 +13,12 @@ class LiveInfoSerializer(serializers.Serializer):
     live_content = serializers.CharField(default='未設定', max_length=20, required=False)
     is_delete = serializers.BooleanField(default=False, required=False)
 ```
-- write_only：為True，字段只在反序列化時使用
-- read_only：為True，字段只在序列化時使用
-- required：為True，如果字段在反序列化時使用，該字段必傳傳入
-- default：設置序列化和反序列化操作時的默認值
-- max_length和min_length：設置字符串的最大長度和最小長度
-- max_value和min_value：設置數字的最大值和最小值
+- write_only：True, Deserialization
+- read_only：True, Serialization
+- required：True, Deserialization
+- default：default value
+- max_length & min_length：max and min length
+- max_value & min_value：max and min number
 
 2. Serializer - Sub List
    1. PrimaryKeyRelateField
@@ -133,7 +133,7 @@ class LiveListView(View):
 1. Simple Router
 2. Default Router
 
-DefaultRouter和SimpleRouter的區別多生成一個根路徑(/)配置項，並且每個配置項地址後都可以跟上.json，直接返回json數據。
+The difference between DefaultRouter and SimpleRouter generates an additional root path (/) configuration item, and each configuration item address can follow .json and return json data directly.
 
 ```python:
 from rest_framework.routers 
@@ -149,4 +149,4 @@ urlpatterns += router.urls
 ```
 
 ## Other Function
-DRF框架還有其他功能：認證、權限、限流、過濾、排序、分頁和異常處理機制。
+The DRF framework has other functions: authentication, permissions, current limiting, filtering, sorting, paging, and exception handling mechanisms.
