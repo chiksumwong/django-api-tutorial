@@ -70,13 +70,23 @@ from rest_framework.parsers import JSONParser
 stream = io.BytesIO(content)
 data = JSONParser().parse(stream)
 ```
+
 Native datatypes into an object instance
 ```python
 serializer = SnippetSerializer(data=data)
+# Create serializer
+
 serializer.is_valid()
-# True
+# Return True or False
+
+serializer.errors
+# return the error during serializer
+
 serializer.validated_data
 # OrderedDict([('title', ''), ('code', 'print("hello, world")\n'), ('linenos', False), ('language', 'python'), ('style', 'friendly')])
+serializer.validated_data.get('title')
+
 serializer.save()
+# Call create() or update()
 # <Snippet: Snippet object> (model instance)
 ```
