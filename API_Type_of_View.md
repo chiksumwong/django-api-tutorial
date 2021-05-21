@@ -1,7 +1,61 @@
 # Type of View to Use
 
 ## Level 1: ViewSet
+> https://www.django-rest-framework.org/api-guide/viewsets/
+### ReadOnlyModelViewSet
+```python:
+from rest_framework import viewsets
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    This viewset automatically provides `list` and `retrieve` actions.
+    """
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+```
 ### ModelViewSet
+```python:
+# View
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+from rest_framework import permissions
+from tutorial.quickstart.serializers import UserSerializer, GroupSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+# URL
+from django.urls import include, path
+from rest_framework import routers
+from tutorial.quickstart import views
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
+
+# Wire up our API using automatic URL routing.
+# Additionally, we include login URLs for the browsable API.
+urlpatterns = [
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+]
+```
+
 ```python:
 # views.py
 from rest_framework.decorators import action
@@ -17,7 +71,7 @@ class LiveInfoView(ModelViewSet):
     queryset = LiveInfo.objects.all()
     lookup_value_regex = '\d+'
 
-    # Extra Function
+    # Extra Function / Action
     @action(methods='get', detail=False)
     def latest(self, request):
         """ Get Latest """
@@ -35,24 +89,24 @@ class LiveInfoView(ModelViewSet):
         return Response(serializer.data)
 
 # urls.py
-from django.conf.urls import url
-
+from django.urls import path
 from . import views
 
 urlpatterns = [
-    url(r'^lives/$', views.LiveInfoViewSet.as_view({
+    path('lives/', views.LiveInfoViewSet.as_view({
         'get': 'list',
         'post': 'create'
     })),
-    url(r'^lives/(?P<pk>\d+)/$', views.LiveInfoViewSet.as_view({
+    path('lives/<int:pk>/', views.LiveInfoViewSet.as_view({
         'get': 'retrieve',
         'put': 'update',
+        'patch': 'partial_update',
         'delete': 'destroy'
     })),
-    url(r'^lives/latest/$', views.LiveInfoViewSet.as_view({
+    path('lives/latest/', views.LiveInfoViewSet.as_view({
         'get': 'latest'
     })),
-    url(r'^lives/(?P<pk>\d+)/change_pop/$', views.LiveInfoViewSet.as_view({
+    path('lives/<int:pk>/change_pop/', views.LiveInfoViewSet.as_view({
         'put': 'change_pop'
     }))
 ]
@@ -132,7 +186,9 @@ urlpatterns = [
 ```
 
 ## Level 2: Mixed-in Generic APIView
+> https://www.django-rest-framework.org/api-guide/generic-views/
 ```python:
+# View
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 from livetest.models import LiveInfo
@@ -140,13 +196,19 @@ from livetest.serializers import LiveInfoSerializer
 
 
 class LiveListView(ListCreateAPIView):
-    serializer_class = LiveInfoSerializer
     queryset = LiveInfo.objects.all()
+    serializer_class = LiveInfoSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class LiveDetailView(RetrieveUpdateDestroyAPIView):
-    serializer_class = LiveInfoSerializer
     queryset = LiveInfo.objects.all()
+    serializer_class = LiveInfoSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+# URL
+path('users/', views.LiveListView.as_view()),
+path('users/<int:pk>/', views.LiveDetailView.as_view()),
 ```
 
 ## Level 3: Generic APIView with Mixin
@@ -161,8 +223,9 @@ from livetest.serializers import LiveInfoSerializer
 
 
 class LiveListView(GenericAPIView):
-    serializer_class = LiveInfoSerializer
+
     queryset = LiveInfo.objects.all()
+    serializer_class = LiveInfoSerializer
 
     def get(self, request):
         """ Get All """
@@ -179,9 +242,10 @@ class LiveListView(GenericAPIView):
 
 
 class LiveDetailView(GenericAPIView):
-    serializer_class = LiveInfoSerializer
-    queryset = LiveInfo.objects.all()
 
+    queryset = LiveInfo.objects.all()
+    serializer_class = LiveInfoSerializer
+    
     def get(self, request, pk):
         """ Get One """
         instance = self.get_object()
@@ -203,6 +267,44 @@ class LiveDetailView(GenericAPIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 ```
 ### Mixin
+#### Example 1
+```python:
+from snippets.models import Snippet
+from snippets.serializers import SnippetSerializer
+from rest_framework import mixins
+from rest_framework import generics
+
+class SnippetList(mixins.ListModelMixin,
+                  mixins.CreateModelMixin,
+                  generics.GenericAPIView):
+
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+class SnippetDetail(mixins.RetrieveModelMixin,
+                    mixins.UpdateModelMixin,
+                    mixins.DestroyModelMixin,
+                    generics.GenericAPIView):
+
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+```
+#### Example 2
 ```python:
 from rest_framework import mixins
 from rest_framework.generics import GenericAPIView
@@ -253,6 +355,74 @@ class LiveDetailView(
 ```
 
 ## Level 4: APIView
+### Example 1
+```python:
+# View
+from snippets.models import Snippet
+from snippets.serializers import SnippetSerializer
+from django.http import Http404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+
+class SnippetList(APIView):
+    """
+    List all snippets, or create a new snippet.
+    """
+    def get(self, request, format=None):
+        snippets = Snippet.objects.all()
+        serializer = SnippetSerializer(snippets, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = SnippetSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class SnippetDetail(APIView):
+    """
+    Retrieve, update or delete a snippet instance.
+    """
+    def get_object(self, pk):
+        try:
+            return Snippet.objects.get(pk=pk)
+        except Snippet.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        serializer = SnippetSerializer(snippet)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        serializer = SnippetSerializer(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+# URL
+from django.urls import path
+from rest_framework.urlpatterns import format_suffix_patterns
+from snippets import views
+
+urlpatterns = [
+    path('snippets/', views.SnippetList.as_view()),
+    path('snippets/<int:pk>/', views.SnippetDetail.as_view()),
+]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
+```
+### Example 2
 ```python:
 import json
 
@@ -311,7 +481,7 @@ class LiveDetailView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 ```
 
-## Level 5: View
+## Level 5: View (Not Used)
 ```python:
 import json
 
@@ -368,4 +538,70 @@ class LiveDetailView(View):
         live.delete()
 
         return HttpResponse(status=204)
+```
+
+## Level 5: Function (Not Used)
+```python:
+# View
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from snippets.models import Snippet
+from snippets.serializers import SnippetSerializer
+
+
+@api_view(['GET', 'POST'])
+def snippet_list(request):
+    """
+    List all code snippets, or create a new snippet.
+    """
+    if request.method == 'GET':
+        snippets = Snippet.objects.all()
+        serializer = SnippetSerializer(snippets, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = SnippetSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def snippet_detail(request, pk):
+    """
+    Retrieve, update or delete a code snippet.
+    """
+    try:
+        snippet = Snippet.objects.get(pk=pk)
+    except Snippet.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = SnippetSerializer(snippet)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = SnippetSerializer(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+# URL
+from django.urls import path
+from rest_framework.urlpatterns import format_suffix_patterns
+from snippets import views
+
+urlpatterns = [
+    path('snippets/', views.snippet_list),
+    path('snippets/<int:pk>', views.snippet_detail),
+]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
 ```

@@ -21,15 +21,24 @@ class LiveInfoSerializer(serializers.Serializer):
 - max_value & min_value：max and min number
 
 2. Serializer - Sub List
-   1. PrimaryKeyRelateField
+> https://www.django-rest-framework.org/api-guide/relations/#serializer-relations
+   1. PrimaryKeyRelateField (Get the PK only)
     ```python:
-    Ltype = serializers.PrimaryKeyRelatedField(read_only=True)
-
-    # OR
-
     Ltype = serializers.PrimaryKeyRelatedField(queryset=LiveInfo.objects.all())
     ```
-   2. Serializer in Serializer (Best)
+    - Example
+        ```python:
+        from django.contrib.auth.models import User
+
+        class UserSerializer(serializers.ModelSerializer):
+            snippets = serializers.PrimaryKeyRelatedField(many=True, queryset=Snippet.objects.all())
+
+            class Meta:
+                model = User
+                fields = ['id', 'username', 'snippets']
+        ```
+
+   2. Serializer in Serializer (Best) (Get what you want)
     ```python:
     Ltype = LiveInfoSerializer()
     ```
@@ -143,6 +152,7 @@ class LiveListView(View):
 
 
 ## Router
+> https://www.django-rest-framework.org/api-guide/routers/
 1. Simple Router
 2. Default Router
 
