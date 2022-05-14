@@ -1,0 +1,29 @@
+Content-Type: multipart/alternative;
+ boundary="===============4971503910025046859=="
+MIME-Version: 1.0
+Subject: [Application]: Confirmation
+From: cswong@example.com.hk
+To: admin@example.com
+Cc: samwongdev20@gmail.com
+Date: Sat, 04 Dec 2021 08:18:00 -0000
+Message-ID: <163860588027.12720.10409406211361984414@DESKTOP-3AJJOQ8>
+
+--===============4971503910025046859==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<p>Dear admin,</p>
+<p>
+    This is confirmation email.
+</p>
+</body>
+</html>
+--===============4971503910025046859==--
+
+-------------------------------------------------------------------------------

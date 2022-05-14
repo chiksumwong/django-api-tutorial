@@ -1,0 +1,58 @@
+Content-Type: multipart/alternative;
+ boundary="===============0984874561759849502=="
+MIME-Version: 1.0
+Subject: [Application]: Confirmation
+From: cswong@example.com.hk
+To: admin@example.com
+Cc: samwongdev20@gmail.com
+Date: Sat, 04 Dec 2021 06:25:00 -0000
+Message-ID: <163859910019.12720.5648539271590706459@DESKTOP-3AJJOQ8>
+
+--===============0984874561759849502==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<p>Dear admin,</p>
+<p>
+    This is confirmation email.
+</p>
+</body>
+</html>
+--===============0984874561759849502==--
+
+-------------------------------------------------------------------------------
+Content-Type: multipart/alternative;
+ boundary="===============4154189024213434921=="
+MIME-Version: 1.0
+Subject: [Application]: Confirmation
+From: cswong@example.com.hk
+To: admin@example.com
+Cc: samwongdev20@gmail.com
+Date: Sat, 04 Dec 2021 06:25:00 -0000
+Message-ID: <163859910028.12720.13001189803072768989@DESKTOP-3AJJOQ8>
+
+--===============4154189024213434921==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<p>Dear admin,</p>
+<p>
+    This is confirmation email.
+</p>
+</body>
+</html>
+--===============4154189024213434921==--
+
+-------------------------------------------------------------------------------

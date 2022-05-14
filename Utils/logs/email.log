@@ -1,0 +1,529 @@
+2021-12-04 13:51:28,365  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\management\commands\runapscheduler.py  <handle>  Added job 'send_email'.
+2021-12-04 13:51:28,365  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\management\commands\runapscheduler.py  <handle>  Added weekly job: 'delete_old_job_executions'.
+2021-12-04 13:51:28,365  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\management\commands\runapscheduler.py  <handle>  Scheduler Start
+2021-12-04 13:52:00,105  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 13:52:00,152  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  
+EMAIL ERROR: run_send_email_task Error
+Path for saving email messages exists, but is not a directory: C:\Users\CS\Desktop\django-lab\logs\email.log
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\core\mail\backends\filebased.py", line 22, in __init__
+    os.makedirs(self.file_path, exist_ok=True)
+  File "C:\Python39\lib\os.py", line 225, in makedirs
+    mkdir(name, mode)
+FileExistsError: [WinError 183] Cannot create a file when that file already exists: 'C:\\Users\\CS\\Desktop\\django-lab\\logs\\email.log'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 58, in run_email_task_send
+    connection = mail.get_connection()
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\core\mail\__init__.py", line 35, in get_connection
+    return klass(fail_silently=fail_silently, **kwds)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\core\mail\backends\filebased.py", line 24, in __init__
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Path for saving email messages exists, but is not a directory: C:\Users\CS\Desktop\django-lab\logs\email.log
+
+2021-12-04 13:53:00,121  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\management\commands\runapscheduler.py  <handle>  Scheduler Stop
+2021-12-04 13:53:00,121  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\management\commands\runapscheduler.py  <handle>  Scheduler shut down successfully!
+2021-12-04 13:55:10,897  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\management\commands\runapscheduler.py  <handle>  Added job 'send_email'.
+2021-12-04 13:55:10,898  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\management\commands\runapscheduler.py  <handle>  Added weekly job: 'delete_old_job_executions'.
+2021-12-04 13:55:10,899  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\management\commands\runapscheduler.py  <handle>  Scheduler Start
+2021-12-04 13:56:00,152  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 13:56:00,158  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== Start To Send Email: 26 =====
+2021-12-04 13:56:00,159  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 1 / 26
+2021-12-04 13:56:00,213  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:00,236  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 2 / 26
+2021-12-04 13:56:00,289  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:00,319  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 3 / 26
+2021-12-04 13:56:00,356  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:00,380  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 4 / 26
+2021-12-04 13:56:00,420  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:00,451  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 5 / 26
+2021-12-04 13:56:00,488  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:00,520  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 6 / 26
+2021-12-04 13:56:00,559  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:00,591  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 7 / 26
+2021-12-04 13:56:00,618  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:00,640  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 8 / 26
+2021-12-04 13:56:00,680  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:00,712  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 9 / 26
+2021-12-04 13:56:00,742  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:00,771  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 10 / 26
+2021-12-04 13:56:00,812  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:00,935  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 11 / 26
+2021-12-04 13:56:00,980  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:01,019  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 12 / 26
+2021-12-04 13:56:01,044  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:01,090  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 13 / 26
+2021-12-04 13:56:01,112  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:01,149  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 14 / 26
+2021-12-04 13:56:01,200  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:01,232  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 15 / 26
+2021-12-04 13:56:01,254  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:01,293  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 16 / 26
+2021-12-04 13:56:01,316  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:01,352  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 17 / 26
+2021-12-04 13:56:01,375  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:01,412  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 18 / 26
+2021-12-04 13:56:01,435  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:01,472  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 19 / 26
+2021-12-04 13:56:01,495  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:01,533  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 20 / 26
+2021-12-04 13:56:01,555  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:01,593  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 21 / 26
+2021-12-04 13:56:01,615  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:01,654  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 22 / 26
+2021-12-04 13:56:01,675  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:01,713  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 23 / 26
+2021-12-04 13:56:01,740  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:01,773  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 24 / 26
+2021-12-04 13:56:01,795  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:01,832  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 25 / 26
+2021-12-04 13:56:01,866  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:01,915  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 26 / 26
+2021-12-04 13:56:01,953  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:56:02,039  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== End To Send Email =====
+2021-12-04 13:57:00,235  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 13:57:00,285  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== Start To Send Email: 1 =====
+2021-12-04 13:57:00,286  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 1 / 1
+2021-12-04 13:57:00,430  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:57:00,541  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== End To Send Email =====
+2021-12-04 13:58:00,363  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 13:58:00,372  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== Start To Send Email: 1 =====
+2021-12-04 13:58:00,373  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 1 / 1
+2021-12-04 13:58:00,414  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:58:00,462  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== End To Send Email =====
+2021-12-04 13:59:00,175  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 13:59:00,181  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== Start To Send Email: 1 =====
+2021-12-04 13:59:00,181  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 1 / 1
+2021-12-04 13:59:00,227  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 13:59:00,302  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== End To Send Email =====
+2021-12-04 13:59:07,817  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:00:00,173  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:00:00,225  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== Start To Send Email: 2 =====
+2021-12-04 14:00:00,225  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 1 / 2
+2021-12-04 14:00:01,166  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:00:01,163  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:00:01,204  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 2 / 2
+2021-12-04 14:00:01,235  [ERROR]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  
+EMAIL ERROR: Send Email Error
+Traceback (most recent call last):
+  File "C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py", line 104, in send_email_html
+    e_content = render_to_string(
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\CS\Desktop\django-env\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: et_2_completed_report.html
+
+2021-12-04 14:00:01,264  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== End To Send Email =====
+2021-12-04 14:01:00,192  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\management\commands\runapscheduler.py  <handle>  Scheduler Stop
+2021-12-04 14:01:00,199  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\management\commands\runapscheduler.py  <handle>  Scheduler shut down successfully!
+2021-12-04 14:01:37,459  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\management\commands\runapscheduler.py  <handle>  Added job 'send_email'.
+2021-12-04 14:01:37,460  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\management\commands\runapscheduler.py  <handle>  Added weekly job: 'delete_old_job_executions'.
+2021-12-04 14:01:37,461  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\management\commands\runapscheduler.py  <handle>  Scheduler Start
+2021-12-04 14:03:01,112  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\management\commands\runapscheduler.py  <handle>  Scheduler Stop
+2021-12-04 14:03:01,114  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\management\commands\runapscheduler.py  <handle>  Scheduler shut down successfully!
+2021-12-04 14:04:05,228  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\management\commands\runapscheduler.py  <handle>  Added job 'send_email'.
+2021-12-04 14:04:05,229  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\management\commands\runapscheduler.py  <handle>  Added weekly job: 'delete_old_job_executions'.
+2021-12-04 14:04:05,229  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\management\commands\runapscheduler.py  <handle>  Scheduler Start
+2021-12-04 14:06:51,187  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:06:58,123  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:07:00,418  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== Start To Send Email: 2 =====
+2021-12-04 14:07:00,418  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 1 / 2
+2021-12-04 14:07:01,419  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:07:01,468  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 2 / 2
+2021-12-04 14:07:01,521  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:07:01,552  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== End To Send Email =====
+2021-12-04 14:08:58,242  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:08:58,492  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:08:58,759  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:08:58,996  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:08:59,287  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:08:59,557  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:08:59,758  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:09:00,054  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:09:00,319  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:09:00,431  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== Start To Send Email: 9 =====
+2021-12-04 14:09:00,432  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 1 / 9
+2021-12-04 14:09:00,501  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:09:00,656  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:09:00,656  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 2 / 9
+2021-12-04 14:09:00,703  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:09:00,729  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 3 / 9
+2021-12-04 14:09:00,769  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:09:00,796  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 4 / 9
+2021-12-04 14:09:00,853  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:09:00,874  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:09:00,912  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 5 / 9
+2021-12-04 14:09:00,943  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:09:00,998  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 6 / 9
+2021-12-04 14:09:01,030  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:09:01,082  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 7 / 9
+2021-12-04 14:09:01,105  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:09:01,160  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:09:01,194  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 8 / 9
+2021-12-04 14:09:01,252  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:09:01,278  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 9 / 9
+2021-12-04 14:09:01,329  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:09:01,361  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:09:01,500  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== End To Send Email =====
+2021-12-04 14:09:01,662  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:09:01,897  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:09:02,163  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:09:02,481  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:09:02,730  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:09:02,890  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:09:03,168  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:09:03,362  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:10:00,233  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== Start To Send Email: 12 =====
+2021-12-04 14:10:00,243  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 1 / 12
+2021-12-04 14:10:00,374  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:10:00,475  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 2 / 12
+2021-12-04 14:10:00,619  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:10:00,745  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 3 / 12
+2021-12-04 14:10:00,770  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:10:00,819  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 4 / 12
+2021-12-04 14:10:00,842  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:10:00,880  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 5 / 12
+2021-12-04 14:10:00,903  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:10:00,940  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 6 / 12
+2021-12-04 14:10:00,964  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:10:01,003  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 7 / 12
+2021-12-04 14:10:01,027  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:10:01,063  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 8 / 12
+2021-12-04 14:10:01,088  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:10:01,125  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 9 / 12
+2021-12-04 14:10:01,148  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:10:01,186  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 10 / 12
+2021-12-04 14:10:01,210  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:10:01,247  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 11 / 12
+2021-12-04 14:10:01,271  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:10:01,309  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 12 / 12
+2021-12-04 14:10:01,332  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:10:01,370  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== End To Send Email =====
+2021-12-04 14:23:59,408  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:23:59,721  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:24:00,002  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:24:00,171  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== Start To Send Email: 3 =====
+2021-12-04 14:24:00,172  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 1 / 3
+2021-12-04 14:24:00,232  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:24:00,287  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 2 / 3
+2021-12-04 14:24:00,358  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:24:00,443  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:24:00,554  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 3 / 3
+2021-12-04 14:24:00,583  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:24:00,618  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== End To Send Email =====
+2021-12-04 14:24:00,641  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 14:25:00,108  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== Start To Send Email: 2 =====
+2021-12-04 14:25:00,109  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 1 / 2
+2021-12-04 14:25:00,198  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:25:00,258  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 2 / 2
+2021-12-04 14:25:00,286  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 14:25:00,328  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== End To Send Email =====
+2021-12-04 15:37:01,819  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 15:37:02,870  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 15:37:03,780  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 15:38:00,109  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== Start To Send Email: 3 =====
+2021-12-04 15:38:00,110  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 1 / 3
+2021-12-04 15:38:00,278  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 15:38:00,399  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 2 / 3
+2021-12-04 15:38:00,425  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 15:38:00,459  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 3 / 3
+2021-12-04 15:38:00,482  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 15:38:00,518  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== End To Send Email =====
+2021-12-04 16:17:27,337  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <add_confirm_email_task>  Added confirmation email: 1
+2021-12-04 16:18:00,128  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== Start To Send Email: 1 =====
+2021-12-04 16:18:00,128  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  Email Sending: 1 / 1
+2021-12-04 16:18:00,273  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <send_email_html>  Email Sent
+2021-12-04 16:18:00,323  [INFO]  C:\Users\CS\Desktop\django-lab\scheduler_email\manager.py  <run_email_task_send>  ===== End To Send Email =====

@@ -1,0 +1,29 @@
+# Django
+Django==3.2.9
+
+# Env
+django-environ==0.8.1
+
+# API
+djangorestframework==3.12.4
+
+# CROS
+django-cors-headers==3.10.0
+
+# JWT
+djangorestframework-simplejwt==5.0.0
+
+# Mysql
+mysqlclient==2.1.0
+
+# APScheduler
+django-apscheduler==0.6.0
+
+# HTTP Client
+requests==2.26.0
+
+# Encrypt
+pycryptodome==3.11.0
+
+# TOTP
+pyotp==2.6.0

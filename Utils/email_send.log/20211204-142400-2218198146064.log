@@ -1,0 +1,87 @@
+Content-Type: multipart/alternative;
+ boundary="===============1195693716085264104=="
+MIME-Version: 1.0
+Subject: [Application]: Confirmation
+From: cswong@example.com.hk
+To: admin@example.com
+Cc: samwongdev20@gmail.com
+Date: Sat, 04 Dec 2021 06:24:00 -0000
+Message-ID: <163859904023.12720.15880068083712853115@DESKTOP-3AJJOQ8>
+
+--===============1195693716085264104==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<p>Dear admin,</p>
+<p>
+    This is confirmation email.
+</p>
+</body>
+</html>
+--===============1195693716085264104==--
+
+-------------------------------------------------------------------------------
+Content-Type: multipart/alternative;
+ boundary="===============9084495104453377569=="
+MIME-Version: 1.0
+Subject: [Application]: Confirmation
+From: cswong@example.com.hk
+To: admin@example.com
+Cc: samwongdev20@gmail.com
+Date: Sat, 04 Dec 2021 06:24:00 -0000
+Message-ID: <163859904044.12720.5240332433937180389@DESKTOP-3AJJOQ8>
+
+--===============9084495104453377569==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<p>Dear admin,</p>
+<p>
+    This is confirmation email.
+</p>
+</body>
+</html>
+--===============9084495104453377569==--
+
+-------------------------------------------------------------------------------
+Content-Type: multipart/alternative;
+ boundary="===============3289625809066810137=="
+MIME-Version: 1.0
+Subject: [Application]: Confirmation
+From: cswong@example.com.hk
+To: admin@example.com
+Cc: samwongdev20@gmail.com
+Date: Sat, 04 Dec 2021 06:24:00 -0000
+Message-ID: <163859904058.12720.8230903848833359678@DESKTOP-3AJJOQ8>
+
+--===============3289625809066810137==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<p>Dear admin,</p>
+<p>
+    This is confirmation email.
+</p>
+</body>
+</html>
+--===============3289625809066810137==--
+
+-------------------------------------------------------------------------------
