@@ -1,5 +1,5 @@
 # Django
-Django==3.2.15
+Django==3.2.18
 
 # Env
 django-environ==0.8.1
